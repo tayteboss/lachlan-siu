@@ -1,31 +1,52 @@
-export type MediaType = {
-	media: [
-		{
-			webmVideoFile: {
-				url: string;
-			};
-			mp4VideoFile: {
-				url: string;
-			};
-			placeholderImage: {
-				url: string;
-			}
-		}
-	];
-};
-
 export type TransitionsType = {
 	hidden: {
 		opacity: number;
 		transition: {
 			duration: number;
-		}
-	}
+		};
+	};
 	visible: {
 		opacity: number;
 		transition: {
 			duration: number;
-			delay?: number
-		}
-	}
+			delay?: number;
+		};
+	};
+};
+
+export type HomePageType = {
+	introContent: string;
+};
+
+export type SiteSettingsType = {
+	acknowledgementOfCountry: string;
+	email: string;
+	instagramUrl: string;
+	linkedInUrl: string;
+	siteDescription: string;
+	siteTitle: string;
+};
+
+export type ImageType = {
+	asset: {
+		url: string;
+	};
+};
+
+export type MuxVideoType = {
+	asset: {
+		playbackId: string;
+	};
+};
+
+export type ProjectType = {
+	title: string;
+	pageBuilder: [];
+	scope: string;
+	thumbnailImage: string;
+	thumbnailVideo?: string;
+	studio: string;
+	excerpt: string;
+	showContent?: boolean;
+	studioLink?: string;
 };

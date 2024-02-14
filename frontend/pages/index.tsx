@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { NextSeo } from 'next-seo';
-import { TransitionsType } from '../shared/types/types';
+import {
+	HomePageType,
+	ProjectType,
+	SiteSettingsType,
+	TransitionsType
+} from '../shared/types/types';
 import { motion } from 'framer-motion';
 import client from '../client';
 import {
@@ -8,13 +13,19 @@ import {
 	projectsQueryString,
 	siteSettingsQueryString
 } from '../lib/sanityQueries';
+import Header from '../components/layout/Header';
+import Footer from '../components/layout/Footer';
+import InfoModal from '../components/blocks/InfoModal';
+import ProjectsModal from '../components/blocks/ProjectsModal';
+import ProjectsList from '../components/blocks/ProjectsList';
+import HomeIntro from '../components/blocks/HomeIntro';
 
 const PageWrapper = styled(motion.div)``;
 
 type Props = {
-	data: {};
-	siteSettings: {};
-	projects: {};
+	data: HomePageType;
+	siteSettings: SiteSettingsType;
+	projects: ProjectType[];
 	pageTransitionVariants: TransitionsType;
 };
 
@@ -32,8 +43,16 @@ const Page = (props: Props) => {
 			animate="visible"
 			exit="hidden"
 		>
-			<NextSeo title="Boiler" description="Boiler Plate" />
-			Home
+			<NextSeo
+				title={siteSettings?.siteTitle || ''}
+				description={siteSettings?.siteDescription || ''}
+			/>
+			<Header />
+			<HomeIntro />
+			<ProjectsList />
+			<ProjectsModal />
+			<InfoModal />
+			<Footer />
 		</PageWrapper>
 	);
 };
