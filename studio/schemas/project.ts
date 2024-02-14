@@ -24,6 +24,11 @@ export default {
 			type: 'string',
 		},
 		{
+			title: 'Studio Link',
+			name: 'studioLink',
+			type: 'url',
+		},
+		{
 			title: 'Scope',
 			name: 'scope',
 			type: 'string',

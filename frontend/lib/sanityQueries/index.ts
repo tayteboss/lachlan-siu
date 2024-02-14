@@ -9,3 +9,9 @@ export const homePageQueryString = `
 		...,
 	}
 `;
+
+export const projectsQueryString = `
+	*[_type == 'project'] {
+		...,
+	}
+`;

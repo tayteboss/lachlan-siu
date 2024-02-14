@@ -14,44 +14,28 @@ export default {
 			initialValue: 'Two Column Media'
 		},
 		{
-			title: "Use Video on Left Block",
-			name: "useVideoOnLeftBlock",
-			type: "boolean",
-		},
-		{
-			title: "Use Video on Right Block",
-			name: "useVideoOnRightBlock",
-			type: "boolean",
-		},
-		{
 			title: 'Left Image',
 			name: 'leftImage',
 			type: 'image',
-			hidden: ({document}) => document?.useVideoOnLeftBlock,
+			description: 'Please only use an image or video field'
 		},
 		{
 			title: 'Left Video',
 			name: 'leftVideo',
 			type: 'mux.video',
-			hidden: ({document}) => !document?.useVideoOnLeftBlock,
-		},
-		{
-			title: 'Left Image Alt Text',
-			name: 'leftImageAltText',
-			type: 'string',
-			hidden: ({document}) => document?.useVideoOnLeftBlock,
+			description: 'Please only use an image or video field'
 		},
 		{
 			title: 'Right Image',
 			name: 'rightImage',
 			type: 'image',
-			hidden: ({document}) => document?.useVideoOnRightBlock,
+			description: 'Please only use an image or video field'
 		},
 		{
-			title: 'Right Image Alt Text',
-			name: 'rightImageAltText',
-			type: 'string',
-			hidden: ({document}) => document?.useVideoOnRightBlock,
+			title: 'Right Video',
+			name: 'rightVideo',
+			type: 'mux.video',
+			description: 'Please only use an image or video field'
 		},
 	]
 }
