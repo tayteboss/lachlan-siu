@@ -8,7 +8,10 @@ type Props = {
 	data: any;
 };
 
-const HomeIntroWrapper = styled.section``;
+const HomeIntroWrapper = styled.section`
+	position: relative;
+	z-index: 1;
+`;
 
 const Inner = styled(motion.div)`
 	padding: ${pxToRem(120)} 0 ${pxToRem(96)};
