@@ -19,6 +19,9 @@ import InfoModal from '../components/blocks/InfoModal';
 import ProjectsModal from '../components/blocks/ProjectsModal';
 import ProjectsList from '../components/blocks/ProjectsList';
 import HomeIntro from '../components/blocks/HomeIntro';
+import { useEffect, useState } from 'react';
+import useNoScroll from '../hooks/useNoScroll';
+import { ReactLenis, useLenis } from '@studio-freight/react-lenis';
 
 const PageWrapper = styled(motion.div)``;
 
@@ -32,9 +35,24 @@ type Props = {
 const Page = (props: Props) => {
 	const { data, siteSettings, projects, pageTransitionVariants } = props;
 
+	const [projectsModalIsActive, setProjectsModalIsActive] = useState(false);
+	const [infoModalIsActive, setInfoModalIsActive] = useState(false);
+
+	useEffect(() => {
+		if (projectsModalIsActive || infoModalIsActive) {
+			useNoScroll(true);
+		} else {
+			useNoScroll(false);
+		}
+	}, [projectsModalIsActive, infoModalIsActive]);
+
 	console.log('data', data);
 	console.log('siteSettings', siteSettings);
 	console.log('projects', projects);
+
+	const lenis = useLenis(({ scroll }) => {
+		// called every scroll
+	});
 
 	return (
 		<PageWrapper
@@ -47,12 +65,19 @@ const Page = (props: Props) => {
 				title={siteSettings?.siteTitle || ''}
 				description={siteSettings?.siteDescription || ''}
 			/>
-			<Header />
-			<HomeIntro />
-			<ProjectsList />
-			<ProjectsModal />
-			<InfoModal />
-			<Footer />
+			<Header
+				projectsModalIsActive={projectsModalIsActive}
+				infoModalIsActive={infoModalIsActive}
+				setProjectsModalIsActive={setProjectsModalIsActive}
+				setInfoModalIsActive={setInfoModalIsActive}
+			/>
+			<ReactLenis root>
+				<HomeIntro data={data?.introContent} />
+				<ProjectsList />
+				<ProjectsModal />
+				<InfoModal />
+				<Footer />
+			</ReactLenis>
 		</PageWrapper>
 	);
 };
