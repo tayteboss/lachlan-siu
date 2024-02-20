@@ -76,10 +76,15 @@ const Page = (props: Props) => {
 			/>
 			<ReactLenis root>
 				<HomeIntro data={data?.introContent} />
-				<ProjectsList />
+				<ProjectsList data={projects} />
 				<ProjectsModal />
 				<InfoModal />
-				<Footer />
+				<Footer
+					email={siteSettings?.email}
+					acknowledgementOfCountry={
+						siteSettings?.acknowledgementOfCountry
+					}
+				/>
 			</ReactLenis>
 		</PageWrapper>
 	);

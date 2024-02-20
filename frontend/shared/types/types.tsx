@@ -40,13 +40,15 @@ export type MuxVideoType = {
 };
 
 export type ProjectType = {
-	title: string;
-	pageBuilder: [];
-	scope: string;
-	thumbnailImage: string;
+	title?: string;
+	pageBuilder?: [];
+	scope?: string;
+	thumbnailImage?: string;
 	thumbnailVideo?: string;
-	studio: string;
-	excerpt: string;
+	studio?: string;
+	excerpt?: string;
 	showContent?: boolean;
 	studioLink?: string;
+	pageBuilderIsActive?: boolean;
+	setPageBuilderIsActive: (isActive: boolean) => void;
 };

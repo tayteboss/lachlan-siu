@@ -17,6 +17,7 @@ const MobileMenuWrapper = styled.div`
 		position: fixed;
 		width: 100%;
 		z-index: 100;
+		pointer-events: none;
 	}
 `;
 
@@ -34,6 +35,7 @@ const MobileMenuTrigger = styled.button`
 	border-radius: 100px;
 	padding: ${pxToRem(10)};
 	font-size: ${pxToRem(17)};
+	pointer-events: all;
 `;
 
 const MobileMenu = (props: Props) => {

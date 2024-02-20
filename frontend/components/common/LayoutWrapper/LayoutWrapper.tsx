@@ -9,10 +9,10 @@ type Props = {
 const Wrapper = styled.div`
 	margin: 0 auto;
 	max-width: ${(props) => props.theme.layout.innerWrapper};
-	padding: 0 ${pxToRem(25)};
+	padding: 0 ${pxToRem(24)};
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		padding: 0 ${pxToRem(15)};
+		padding: 0 ${pxToRem(16)};
 	}
 `;
 

@@ -30,8 +30,8 @@ const HomeIntro = (props: Props) => {
 
 	const { scrollY } = useScroll();
 
-	const translateY = useTransform(scrollY, [0, viewportHeight], [0, 300]);
-	const opacity = useTransform(scrollY, [0, viewportHeight], [1, 0]);
+	const translateY = useTransform(scrollY, [0, viewportHeight], [0, 350]);
+	const opacity = useTransform(scrollY, [0, viewportHeight * 0.75], [1, 0]);
 
 	useEffect(() => {
 		setViewportHeight(window.innerHeight);

@@ -26,6 +26,7 @@ const HeaderWrapper = styled.header<StyledProps>`
 	left: 0;
 	width: 100%;
 	transform: translateY(${(props) => (props.$isActive ? '0' : '-100%')});
+	z-index: 100;
 
 	transition: all var(--transition-speed-default) var(--transition-ease);
 

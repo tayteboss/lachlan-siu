@@ -96,12 +96,14 @@ export const GlobalStyles = createGlobalStyle`
 	.type-h2 {
 		font-size: ${pxToRem(28)};
 		line-height: ${pxToRem(35)};
+		font-weight: 500;
 	}
 
 	h3,
 	.type-h3 {
 		font-size: ${pxToRem(25)};
 		line-height: ${pxToRem(33)};
+		font-weight: 500;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait} {
 			font-size: ${pxToRem(17)};
@@ -118,6 +120,7 @@ export const GlobalStyles = createGlobalStyle`
 	div {
 		font-size: ${pxToRem(18)};
 		line-height: ${pxToRem(24)};
+		font-weight: 500;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait} {
 			font-size: ${pxToRem(13)};
