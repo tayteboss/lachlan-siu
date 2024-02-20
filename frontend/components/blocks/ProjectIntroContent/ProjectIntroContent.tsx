@@ -6,7 +6,7 @@ import PageBuilderTrigger from '../../elements/PageBuilderTrigger';
 import pxToRem from '../../../utils/pxToRem';
 
 const ProjectIntroContentWrapper = styled.div`
-	grid-column: 1 / 6;
+	grid-column: 1 / 7;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -23,10 +23,20 @@ const ContentWrapper = styled.div``;
 
 const Title = styled.h2`
 	margin-bottom: ${pxToRem(28)};
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		font-size: ${pxToRem(17)};
+		line-height: ${pxToRem(23)};
+		margin-bottom: ${pxToRem(16)};
+	}
 `;
 
 const Excerpt = styled.h3`
 	margin-bottom: ${pxToRem(22)};
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		margin-bottom: ${pxToRem(16)};
+	}
 `;
 
 const TriggerWrapper = styled.div``;

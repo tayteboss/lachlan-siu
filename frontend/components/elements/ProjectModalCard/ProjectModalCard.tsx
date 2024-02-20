@@ -1,26 +1,24 @@
-import styled from 'styled-components';
 import MuxPlayer from '@mux/mux-player-react';
 import Image from 'next/image';
+import styled from 'styled-components';
 import pxToRem from '../../../utils/pxToRem';
+import { motion } from 'framer-motion';
 
 type Props = {
-	thumbnailImage: string | undefined;
-	thumbnailVideo: string | undefined;
+	thumbnailImage?: string;
+	thumbnailVideo?: string;
+	title?: string;
+	index: number;
 };
 
-const ProjectThumbnailWrapper = styled.div`
-	grid-column: 7 / -1;
-
-	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		grid-column: 1 / -1;
-		order: 1;
-		margin-bottom: ${pxToRem(28)};
-	}
+const ProjectModalCardWrapper = styled(motion.div)`
+	width: 100%;
 `;
 
 const Inner = styled.div`
 	padding-top: 100%;
 	position: relative;
+	margin-bottom: ${pxToRem(8)};
 
 	mux-player,
 	img {
@@ -38,11 +36,35 @@ const MediaWrapper = styled.div`
 	left: 0;
 `;
 
-const ProjectThumbnail = (props: Props) => {
-	const { thumbnailImage, thumbnailVideo } = props;
+const Title = styled.h3`
+	font-size: ${pxToRem(20)};
+	line-height: ${pxToRem(26)};
+`;
+
+const ProjectModalCard = (props: Props) => {
+	const { thumbnailVideo, thumbnailImage, title, index } = props;
+
+	const childVariants = {
+		hidden: {
+			opacity: 0,
+			x: -100,
+			transition: {
+				duration: 0.4,
+				ease: 'easeInOut'
+			}
+		},
+		visible: {
+			opacity: 1,
+			x: 0,
+			transition: {
+				duration: 0.4,
+				ease: 'easeInOut'
+			}
+		}
+	};
 
 	return (
-		<ProjectThumbnailWrapper>
+		<ProjectModalCardWrapper variants={childVariants}>
 			<Inner>
 				{thumbnailVideo && (
 					<MediaWrapper>
@@ -69,8 +91,9 @@ const ProjectThumbnail = (props: Props) => {
 					</MediaWrapper>
 				)}
 			</Inner>
-		</ProjectThumbnailWrapper>
+			{title && <Title>{title}</Title>}
+		</ProjectModalCardWrapper>
 	);
 };
 
-export default ProjectThumbnail;
+export default ProjectModalCard;

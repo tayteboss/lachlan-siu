@@ -30,8 +30,8 @@ const Inner = styled.div`
 `;
 
 const MobileMenuTrigger = styled.button`
-	background: #f2f2f2;
-	/* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1); */
+	background: rgba(255, 255, 255, 0.75);
+	backdrop-filter: blur(5px);
 	border-radius: 100px;
 	padding: ${pxToRem(10)};
 	font-size: ${pxToRem(17)};

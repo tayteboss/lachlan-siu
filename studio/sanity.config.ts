@@ -20,6 +20,7 @@ export default defineConfig({
         return S.list()
         .title('Content')
         .items([
+          orderableDocumentListDeskItem({type: 'project', S, context}),
           S.divider(),
           S.listItem()
             .title('Site Settings')

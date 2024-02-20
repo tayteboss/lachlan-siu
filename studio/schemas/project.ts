@@ -1,8 +1,12 @@
+import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list';
+
 export default {
 	title: 'Project',
 	name: 'project',
 	type: 'document',
+	orderings: [orderRankOrdering],
 	fields: [
+		orderRankField({ type: "project" }),
 		{
 			title: 'Title',
 			name: 'title',

@@ -6,6 +6,7 @@ import pxToRem from '../../../utils/pxToRem';
 import LayoutGrid from '../../common/LayoutGrid';
 import { ProjectType } from '../../../shared/types/types';
 import { useState } from 'react';
+import PageBuilder from '../../blocks/PageBuilder';
 
 const ProjectCardWrapper = styled.div`
 	border-bottom: 1px solid var(--colour-black);
@@ -51,6 +52,10 @@ const ProjectCard = (props: ProjectType) => {
 						/>
 					</LayoutGrid>
 				</Inner>
+				<PageBuilder
+					isActive={pageBuilderIsActive}
+					data={pageBuilder}
+				/>
 			</LayoutWrapper>
 		</ProjectCardWrapper>
 	);

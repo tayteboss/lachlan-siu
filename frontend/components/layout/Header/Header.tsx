@@ -20,7 +20,8 @@ type Props = {
 
 const HeaderWrapper = styled.header<StyledProps>`
 	padding: ${pxToRem(15)} 0;
-	background: var(--colour-white);
+	background: rgba(255, 255, 255, 0.75);
+	backdrop-filter: blur(5px);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -104,9 +105,10 @@ const Header = (props: Props) => {
 				<Inner>
 					<HeaderTrigger
 						align="left"
-						handleClick={() =>
-							setProjectsModalIsActive(!projectsModalIsActive)
-						}
+						handleClick={() => {
+							setProjectsModalIsActive(!projectsModalIsActive);
+							setInfoModalIsActive(false);
+						}}
 					>
 						<AnimatePresence mode="wait">
 							{projectsModalIsActive ? (
@@ -138,9 +140,10 @@ const Header = (props: Props) => {
 					<Logo />
 					<HeaderTrigger
 						align="right"
-						handleClick={() =>
-							setInfoModalIsActive(!infoModalIsActive)
-						}
+						handleClick={() => {
+							setInfoModalIsActive(!infoModalIsActive);
+							setProjectsModalIsActive(false);
+						}}
 					>
 						<AnimatePresence mode="wait">
 							{infoModalIsActive ? (

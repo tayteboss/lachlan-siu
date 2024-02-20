@@ -27,7 +27,7 @@ const Inner = styled.div`
 `;
 
 const EmailWrapper = styled.div`
-	grid-column: 1 / 6;
+	grid-column: 1 / 7;
 	order: 1;
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
@@ -46,7 +46,7 @@ const Email = styled.a`
 `;
 
 const AOCWrapper = styled.div`
-	grid-column: 6 / -1;
+	grid-column: 7 / -1;
 	order: 2;
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {

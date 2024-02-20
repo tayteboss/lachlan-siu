@@ -164,15 +164,70 @@ export const GlobalStyles = createGlobalStyle`
 
 	.view-element-scale-up
 	{
-		transform: scale(0.95);
-		opacity: 0;
+		img,
+		mux-player {
+			transform: scale(1.05);
+			opacity: 0;
 
-		transition: opacity var(--transition-speed-default) ease, transform var(--transition-speed-default) ease;
+			transition: opacity 300ms ease, transform 3000ms ease-in-out;
+		}
+
 
 		&--in-view
 		{
-			opacity: 1;
-			transform: scale(1);
+			img,
+			mux-player {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+	}
+
+	.rich-text {
+		* {
+			text-align: center;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4 {
+			font-size: ${pxToRem(20)};
+			line-height: ${pxToRem(24)};
+			font-weight: 600;
+
+			@media ${theme.mediaBreakpoints.tabletPortrait} {
+				font-size: ${pxToRem(17)};
+			}
+		}
+
+		p {
+			font-size: ${pxToRem(18)};
+			line-height: ${pxToRem(24)};
+
+			&:not(:last-child) {
+				margin-bottom: 16px;
+
+				@media ${theme.mediaBreakpoints.tabletPortrait} {
+					margin-bottom: 8px;
+				}
+			}
+
+			@media ${theme.mediaBreakpoints.tabletPortrait} {
+				font-size: ${pxToRem(17)};
+			}
+		}
+
+		h1,
+		h2,
+		h3,
+		h4
+		{
+			margin-bottom: 16px;
+
+			@media ${theme.mediaBreakpoints.tabletPortrait} {
+				margin-bottom: 8px;
+			}
 		}
 	}
 
@@ -250,4 +305,24 @@ export const GlobalStyles = createGlobalStyle`
 		max-width: 100%;
 		display: block;
 	}
+
+	html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
 `;

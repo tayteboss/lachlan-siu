@@ -18,6 +18,17 @@ export type HomePageType = {
 	introContent: string;
 };
 
+export type ClientType = {
+	title: string;
+	url: string;
+};
+
+export type InfoPageType = {
+	clientList: ClientType[];
+	introContent: string;
+	pastList: ClientType[];
+};
+
 export type SiteSettingsType = {
 	acknowledgementOfCountry: string;
 	email: string;

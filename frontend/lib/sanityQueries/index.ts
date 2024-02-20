@@ -10,6 +10,12 @@ export const homePageQueryString = `
 	}
 `;
 
+export const infoPageQueryString = `
+	*[_type == 'infoPage'][0] {
+		...,
+	}
+`;
+
 export const projectsQueryString = `
 	*[_type == 'project'] {
 		...,
@@ -19,9 +25,9 @@ export const projectsQueryString = `
 			...,
 			"image": image.asset->url,
 			"leftImage": leftImage.asset->url,
-			"leftVideo": leftVideo.asset->url,
+			"leftVideo": leftVideo.asset->playbackId,
 			"rightImage": rightImage.asset->url,
-			"rightVideo": rightVideo.asset->url,
+			"rightVideo": rightVideo.asset->playbackId,
 			"video": video.asset->playbackId,
 		},
 	}
