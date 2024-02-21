@@ -25,6 +25,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ReactLenis, useLenis } from '@studio-freight/react-lenis';
 import MobileMenu from '../components/elements/MobileMenu';
 import throttle from 'lodash.throttle';
+import useViewportWidth from '../hooks/useViewportWidth';
 
 type StyledProps = {
 	$isActive: boolean;
@@ -55,8 +56,10 @@ const Page = (props: Props) => {
 	const [infoModalIsActive, setInfoModalIsActive] = useState(false);
 	const [activeProject, setActiveProject] = useState<boolean | number>(false);
 	const [isHeaderActive, setHeaderIsActive] = useState(true);
+	const [scrollToProject, setScrollToProject] = useState(0);
 
 	const prevScrollPosRef = useRef(0);
+	const viewportWidth = useViewportWidth();
 
 	const handleScroll = () => {
 		const currentScrollPos = window.pageYOffset;
@@ -94,9 +97,20 @@ const Page = (props: Props) => {
 	useEffect(() => {
 		if (activeProject) {
 			setHeaderIsActive(false);
-			lenis?.scrollTo(`#project-${activeProject}`);
 		}
 	}, [activeProject]);
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			if (viewportWidth === 'mobile') {
+				lenis?.scrollTo(`#project-${activeProject}-content`);
+			} else {
+				lenis?.scrollTo(`#project-${activeProject}`);
+			}
+		}, 250);
+
+		return () => clearTimeout(timer);
+	}, [scrollToProject]);
 
 	return (
 		<PageWrapper
@@ -151,8 +165,11 @@ const Page = (props: Props) => {
 				<ProjectsModal
 					isActive={projectsModalIsActive}
 					data={projects}
+					activeProject={activeProject}
+					scrollToProject={scrollToProject}
 					setActiveProject={setActiveProject}
 					setProjectsModalIsActive={setProjectsModalIsActive}
+					setScrollToProject={setScrollToProject}
 				/>
 			</ReactLenis>
 		</PageWrapper>

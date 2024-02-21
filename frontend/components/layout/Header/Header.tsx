@@ -21,6 +21,7 @@ const HeaderWrapper = styled.header<StyledProps>`
 	padding: ${pxToRem(15)} 0;
 	background: rgba(255, 255, 255, 0.75);
 	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
 	position: fixed;
 	top: 0;
 	left: 0;

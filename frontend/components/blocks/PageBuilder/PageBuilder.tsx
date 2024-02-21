@@ -9,6 +9,7 @@ import pxToRem from '../../../utils/pxToRem';
 type Props = {
 	isActive: boolean;
 	data: [] | undefined;
+	index: number;
 };
 
 const wrapperVariants = {
@@ -56,7 +57,7 @@ const Inner = styled.div`
 `;
 
 const PageBuilder = (props: Props) => {
-	const { isActive, data } = props;
+	const { isActive, data, index } = props;
 
 	const hasData = data && data.length > 0;
 
@@ -68,6 +69,7 @@ const PageBuilder = (props: Props) => {
 					initial="hidden"
 					animate="visible"
 					exit="hidden"
+					id={`project-${index}-content`}
 				>
 					<Outer variants={childVariants}>
 						<Inner>

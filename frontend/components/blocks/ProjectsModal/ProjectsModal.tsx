@@ -8,6 +8,9 @@ import LayoutWrapper from '../../common/LayoutWrapper';
 type Props = {
 	isActive: boolean;
 	data: ProjectType[];
+	activeProject: boolean | number;
+	scrollToProject: number;
+	setScrollToProject: (value: number) => void;
 	setActiveProject: (value: boolean | number) => void;
 	setProjectsModalIsActive: (value: boolean) => void;
 };
@@ -41,6 +44,7 @@ const ProjectsModalWrapper = styled(motion.div)`
 	height: 100vh;
 	background-color: rgba(255, 255, 255, 0.9);
 	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
 	z-index: 90;
 	pointer-events: all;
 	overflow: auto;
@@ -61,8 +65,15 @@ const Inner = styled.div`
 `;
 
 const ProjectsModal = (props: Props) => {
-	const { isActive, data, setActiveProject, setProjectsModalIsActive } =
-		props;
+	const {
+		isActive,
+		data,
+		activeProject,
+		scrollToProject,
+		setScrollToProject,
+		setActiveProject,
+		setProjectsModalIsActive
+	} = props;
 
 	const hasData = data.length > 0;
 
@@ -86,6 +97,9 @@ const ProjectsModal = (props: Props) => {
 										title={item?.title}
 										key={i}
 										index={i}
+										activeProject={activeProject}
+										scrollToProject={scrollToProject}
+										setScrollToProject={setScrollToProject}
 										setActiveProject={setActiveProject}
 										setProjectsModalIsActive={
 											setProjectsModalIsActive

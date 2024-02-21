@@ -10,7 +10,7 @@ type Props = {
 
 const ProjectsListWrapper = styled.section`
 	position: relative;
-	z-index: 2;
+	z-index: 3;
 	background: var(--colour-white);
 `;
 

@@ -30,13 +30,14 @@ const Inner = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
-	height: calc(100svh - var(--header-h));
+	height: calc(100dvh - var(--header-h));
 	padding-bottom: ${pxToRem(24)};
 `;
 
 const MobileMenuTrigger = styled.button<StyledProps>`
 	background: rgba(255, 255, 255, 0.75);
 	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
 	border-radius: 100px;
 	padding: ${pxToRem(10)};
 	font-size: ${pxToRem(17)};

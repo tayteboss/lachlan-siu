@@ -3,12 +3,16 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import pxToRem from '../../../utils/pxToRem';
 import { motion } from 'framer-motion';
+import { useLenis } from '@studio-freight/react-lenis';
 
 type Props = {
 	thumbnailImage?: string;
 	thumbnailVideo?: string;
 	title?: string;
 	index: number;
+	activeProject: boolean | number;
+	scrollToProject: number;
+	setScrollToProject: (value: number) => void;
 	setActiveProject: (value: boolean | number) => void;
 	setProjectsModalIsActive: (value: boolean) => void;
 };
@@ -49,6 +53,9 @@ const ProjectModalCard = (props: Props) => {
 		thumbnailImage,
 		title,
 		index,
+		activeProject,
+		scrollToProject,
+		setScrollToProject,
 		setActiveProject,
 		setProjectsModalIsActive
 	} = props;
@@ -75,6 +82,7 @@ const ProjectModalCard = (props: Props) => {
 	const handleClick = () => {
 		setProjectsModalIsActive(false);
 		setActiveProject(index);
+		setScrollToProject(scrollToProject + 1);
 	};
 
 	return (

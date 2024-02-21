@@ -10,7 +10,7 @@ type Props = {
 
 const HomeIntroWrapper = styled.section`
 	position: relative;
-	z-index: 1;
+	z-index: 2;
 `;
 
 const Inner = styled(motion.div)`

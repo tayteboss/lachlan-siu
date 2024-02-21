@@ -55,7 +55,12 @@ const ProjectCard = (props: ProjectType) => {
 	return (
 		<ProjectCardWrapper id={`project-${index}`}>
 			<LayoutWrapper>
-				<Inner>
+				<Inner
+					onClick={() => {
+						if (!showContent) return;
+						setPageBuilderIsActive(!pageBuilderIsActive);
+					}}
+				>
 					<LayoutGrid>
 						<ProjectIntroContent
 							title={title}
@@ -76,6 +81,7 @@ const ProjectCard = (props: ProjectType) => {
 				<PageBuilder
 					isActive={pageBuilderIsActive}
 					data={pageBuilder}
+					index={index}
 				/>
 			</LayoutWrapper>
 		</ProjectCardWrapper>
