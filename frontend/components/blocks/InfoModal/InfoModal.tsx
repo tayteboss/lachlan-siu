@@ -56,7 +56,7 @@ const IntroWrapper = styled.div`
 	padding: ${pxToRem(120)} 0 ${pxToRem(64)};
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		padding: ${pxToRem(24)} 0 ${pxToRem(36)};
+		padding: calc(var(--header-h) + 24px) 0 ${pxToRem(36)};
 	}
 `;
 
@@ -67,6 +67,10 @@ const SocialWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		margin-bottom: ${pxToRem(32)};
+	}
 `;
 
 const SocialLink = styled.a`

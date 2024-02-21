@@ -12,7 +12,7 @@ const ClientListWrapper = styled.div`
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		&:first-child {
-			margin-bottom: ${pxToRem(24)};
+			margin-bottom: ${pxToRem(32)};
 		}
 	}
 `;
