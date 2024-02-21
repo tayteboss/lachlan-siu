@@ -7,27 +7,27 @@ dotenv.config({
 });
 
 const fetchAPI = async (query, { variables } = {}) => {
-	const url = `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v1/graphql/${process.env.NEXT_PUBLIC_SANITY_DATASET}/default`;
+	// const url = `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v1/graphql/${process.env.NEXT_PUBLIC_SANITY_DATASET}/default`;
 
-	const response = await fetch(url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
-		},
-		body: JSON.stringify({
-			query,
-			variables,
-		}),
-	});
+	// const response = await fetch(url, {
+	// 	method: 'POST',
+	// 	headers: {
+	// 		'Content-Type': 'application/json',
+	// 		Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
+	// 	},
+	// 	body: JSON.stringify({
+	// 		query,
+	// 		variables,
+	// 	}),
+	// });
 
-	if (!response.ok) {
-		throw new Error(`HTTP error! Status: ${response.status}`);
-	}
+	// if (!response.ok) {
+	// 	throw new Error(`HTTP error! Status: ${response.status}`);
+	// }
 
-	const json = await response.json();
+	// const json = await response.json();
 
-	return json.data;
+	// return json.data;
 };
 
 const getSiteData = async () => {
