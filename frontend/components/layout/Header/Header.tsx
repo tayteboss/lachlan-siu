@@ -4,8 +4,6 @@ import HeaderTrigger from '../../elements/HeaderTrigger';
 import Logo from '../../elements/Logo';
 import pxToRem from '../../../utils/pxToRem';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
-import throttle from 'lodash.throttle';
 
 type StyledProps = {
 	isActive?: boolean;
@@ -14,6 +12,7 @@ type StyledProps = {
 type Props = {
 	projectsModalIsActive: boolean;
 	infoModalIsActive: boolean;
+	isActive: boolean;
 	setProjectsModalIsActive: (isActive: boolean) => void;
 	setInfoModalIsActive: (isActive: boolean) => void;
 };
@@ -68,36 +67,10 @@ const Header = (props: Props) => {
 	const {
 		projectsModalIsActive,
 		infoModalIsActive,
+		isActive,
 		setProjectsModalIsActive,
 		setInfoModalIsActive
 	} = props;
-
-	const [isActive, setIsActive] = useState(true);
-
-	const prevScrollPosRef = useRef(0);
-
-	const handleScroll = () => {
-		const currentScrollPos = window.pageYOffset;
-
-		if (currentScrollPos < 30) {
-			setIsActive(true);
-			return;
-		}
-
-		const isScrollingDown = currentScrollPos > prevScrollPosRef.current;
-
-		setIsActive(!isScrollingDown);
-		prevScrollPosRef.current = currentScrollPos;
-	};
-
-	useEffect(() => {
-		const throttledHandleScroll = throttle(handleScroll, 100);
-		window.addEventListener('scroll', throttledHandleScroll);
-
-		return () => {
-			window.removeEventListener('scroll', throttledHandleScroll);
-		};
-	}, []);
 
 	return (
 		<HeaderWrapper className="header" $isActive={isActive}>

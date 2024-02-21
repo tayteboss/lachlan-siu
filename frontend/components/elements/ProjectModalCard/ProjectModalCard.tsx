@@ -9,6 +9,8 @@ type Props = {
 	thumbnailVideo?: string;
 	title?: string;
 	index: number;
+	setActiveProject: (value: boolean | number) => void;
+	setProjectsModalIsActive: (value: boolean) => void;
 };
 
 const ProjectModalCardWrapper = styled(motion.div)`
@@ -42,7 +44,14 @@ const Title = styled.h3`
 `;
 
 const ProjectModalCard = (props: Props) => {
-	const { thumbnailVideo, thumbnailImage, title, index } = props;
+	const {
+		thumbnailVideo,
+		thumbnailImage,
+		title,
+		index,
+		setActiveProject,
+		setProjectsModalIsActive
+	} = props;
 
 	const childVariants = {
 		hidden: {
@@ -63,8 +72,16 @@ const ProjectModalCard = (props: Props) => {
 		}
 	};
 
+	const handleClick = () => {
+		setProjectsModalIsActive(false);
+		setActiveProject(index);
+	};
+
 	return (
-		<ProjectModalCardWrapper variants={childVariants}>
+		<ProjectModalCardWrapper
+			onClick={() => handleClick()}
+			variants={childVariants}
+		>
 			<Inner>
 				{thumbnailVideo && (
 					<MediaWrapper>

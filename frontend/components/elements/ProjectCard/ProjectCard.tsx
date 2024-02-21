@@ -5,7 +5,7 @@ import ProjectThumbnail from '../../blocks/ProjectThumbnail';
 import pxToRem from '../../../utils/pxToRem';
 import LayoutGrid from '../../common/LayoutGrid';
 import { ProjectType } from '../../../shared/types/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PageBuilder from '../../blocks/PageBuilder';
 
 const ProjectCardWrapper = styled.div`
@@ -26,13 +26,34 @@ const ProjectCard = (props: ProjectType) => {
 		showContent,
 		studioLink,
 		thumbnailImage,
-		thumbnailVideo
+		thumbnailVideo,
+		activeProject,
+		setActiveProject,
+		index
 	} = props;
 
-	const [pageBuilderIsActive, setPageBuilderIsActive] = useState(false);
+	const [pageBuilderIsActive, setPageBuilderIsActive] = useState(
+		activeProject === index
+	);
+
+	useEffect(() => {
+		if (pageBuilderIsActive) {
+			setActiveProject(index);
+		} else {
+			setActiveProject(false);
+		}
+	}, [pageBuilderIsActive]);
+
+	useEffect(() => {
+		if (activeProject === index) {
+			setPageBuilderIsActive(true);
+		} else {
+			setPageBuilderIsActive(false);
+		}
+	}, [activeProject, index]);
 
 	return (
-		<ProjectCardWrapper>
+		<ProjectCardWrapper id={`project-${index}`}>
 			<LayoutWrapper>
 				<Inner>
 					<LayoutGrid>

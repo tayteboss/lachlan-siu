@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ClientType } from '../../../shared/types/types';
+import pxToRem from '../../../utils/pxToRem';
 
 type Props = {
 	list: ClientType[];
@@ -8,6 +9,12 @@ type Props = {
 
 const ClientListWrapper = styled.div`
 	grid-column: span 6;
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		&:first-child {
+			margin-bottom: ${pxToRem(24)};
+		}
+	}
 `;
 
 const Title = styled.h3``;

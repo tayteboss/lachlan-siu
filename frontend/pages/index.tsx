@@ -21,9 +21,10 @@ import InfoModal from '../components/blocks/InfoModal';
 import ProjectsModal from '../components/blocks/ProjectsModal';
 import ProjectsList from '../components/blocks/ProjectsList';
 import HomeIntro from '../components/blocks/HomeIntro';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ReactLenis, useLenis } from '@studio-freight/react-lenis';
 import MobileMenu from '../components/elements/MobileMenu';
+import throttle from 'lodash.throttle';
 
 type StyledProps = {
 	$isActive: boolean;
@@ -52,16 +53,50 @@ const Page = (props: Props) => {
 
 	const [projectsModalIsActive, setProjectsModalIsActive] = useState(false);
 	const [infoModalIsActive, setInfoModalIsActive] = useState(false);
+	const [activeProject, setActiveProject] = useState<boolean | number>(false);
+	const [isHeaderActive, setHeaderIsActive] = useState(true);
+
+	const prevScrollPosRef = useRef(0);
+
+	const handleScroll = () => {
+		const currentScrollPos = window.pageYOffset;
+
+		if (currentScrollPos < 30) {
+			setHeaderIsActive(true);
+			return;
+		}
+
+		const isScrollingDown = currentScrollPos > prevScrollPosRef.current;
+
+		setHeaderIsActive(!isScrollingDown);
+		prevScrollPosRef.current = currentScrollPos;
+	};
+
+	useEffect(() => {
+		const throttledHandleScroll = throttle(handleScroll, 100);
+		window.addEventListener('scroll', throttledHandleScroll);
+
+		return () => {
+			window.removeEventListener('scroll', throttledHandleScroll);
+		};
+	}, []);
 
 	const lenis = useLenis(({ scroll }) => {});
 
-	// useEffect(() => {
-	// 	if (projectsModalIsActive || infoModalIsActive) {
-	// 		lenis?.stop();
-	// 	} else {
-	// 		lenis?.start();
-	// 	}
-	// }, [lenis, projectsModalIsActive, infoModalIsActive]);
+	useEffect(() => {
+		if (projectsModalIsActive || infoModalIsActive) {
+			lenis?.stop();
+		} else {
+			lenis?.start();
+		}
+	}, [lenis, projectsModalIsActive, infoModalIsActive]);
+
+	useEffect(() => {
+		if (activeProject) {
+			setHeaderIsActive(false);
+			lenis?.scrollTo(`#project-${activeProject}`);
+		}
+	}, [activeProject]);
 
 	return (
 		<PageWrapper
@@ -79,6 +114,7 @@ const Page = (props: Props) => {
 				infoModalIsActive={infoModalIsActive}
 				setProjectsModalIsActive={setProjectsModalIsActive}
 				setInfoModalIsActive={setInfoModalIsActive}
+				isActive={isHeaderActive}
 			/>
 			<MobileMenu
 				projectsModalIsActive={projectsModalIsActive}
@@ -91,7 +127,11 @@ const Page = (props: Props) => {
 					$isActive={projectsModalIsActive || infoModalIsActive}
 				>
 					<HomeIntro data={data?.introContent} />
-					<ProjectsList data={projects} />
+					<ProjectsList
+						data={projects}
+						activeProject={activeProject}
+						setActiveProject={setActiveProject}
+					/>
 					<Footer
 						email={siteSettings?.email}
 						acknowledgementOfCountry={
@@ -111,6 +151,8 @@ const Page = (props: Props) => {
 				<ProjectsModal
 					isActive={projectsModalIsActive}
 					data={projects}
+					setActiveProject={setActiveProject}
+					setProjectsModalIsActive={setProjectsModalIsActive}
 				/>
 			</ReactLenis>
 		</PageWrapper>

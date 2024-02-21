@@ -4,17 +4,18 @@ import ProjectCard from '../../elements/ProjectCard';
 
 type Props = {
 	data: ProjectType[];
+	activeProject: boolean | number;
+	setActiveProject: (value: boolean | number) => void;
 };
 
 const ProjectsListWrapper = styled.section`
 	position: relative;
 	z-index: 2;
-	background: rgba(255, 255, 255, 0.9);
-	backdrop-filter: blur(2px);
+	background: var(--colour-white);
 `;
 
 const ProjectsList = (props: Props) => {
-	const { data } = props;
+	const { data, activeProject, setActiveProject } = props;
 
 	return (
 		<ProjectsListWrapper>
@@ -29,6 +30,9 @@ const ProjectsList = (props: Props) => {
 					studioLink={project?.studioLink}
 					thumbnailImage={project?.thumbnailImage}
 					thumbnailVideo={project?.thumbnailVideo}
+					activeProject={activeProject}
+					setActiveProject={setActiveProject}
+					index={i}
 					key={i}
 				/>
 			))}

@@ -8,6 +8,8 @@ import LayoutWrapper from '../../common/LayoutWrapper';
 type Props = {
 	isActive: boolean;
 	data: ProjectType[];
+	setActiveProject: (value: boolean | number) => void;
+	setProjectsModalIsActive: (value: boolean) => void;
 };
 
 const wrapperVariants = {
@@ -16,7 +18,7 @@ const wrapperVariants = {
 		transition: {
 			duration: 0.5,
 			ease: 'easeInOut',
-			staggerChildren: 0.1,
+			staggerChildren: 0.05,
 			staggerDirection: -1
 		}
 	},
@@ -25,7 +27,7 @@ const wrapperVariants = {
 		transition: {
 			duration: 0.5,
 			ease: 'easeInOut',
-			staggerChildren: 0.1,
+			staggerChildren: 0.05,
 			delayChildren: 0.3
 		}
 	}
@@ -52,10 +54,15 @@ const Inner = styled.div`
 	min-width: ${pxToRem(224)};
 	width: 20%;
 	padding-bottom: ${pxToRem(120)};
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		padding-top: ${pxToRem(32)};
+	}
 `;
 
 const ProjectsModal = (props: Props) => {
-	const { isActive, data } = props;
+	const { isActive, data, setActiveProject, setProjectsModalIsActive } =
+		props;
 
 	const hasData = data.length > 0;
 
@@ -79,6 +86,10 @@ const ProjectsModal = (props: Props) => {
 										title={item?.title}
 										key={i}
 										index={i}
+										setActiveProject={setActiveProject}
+										setProjectsModalIsActive={
+											setProjectsModalIsActive
+										}
 									/>
 								))}
 						</Inner>

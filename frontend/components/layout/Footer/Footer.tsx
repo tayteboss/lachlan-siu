@@ -9,8 +9,10 @@ type Props = {
 };
 
 const FooterWrapper = styled.footer`
-	position: relative;
-	z-index: 2;
+	position: sticky;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
 
 	.layout-grid {
 		align-items: end;

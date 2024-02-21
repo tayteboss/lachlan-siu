@@ -9,36 +9,35 @@ const MediaStackWrapper = styled.div`
 
 type Props = {
 	data: {
-		useVideo: boolean,
+		useVideo: boolean;
 		video: {
-			url: string
-		},
+			url: string;
+		};
 		image: {
-			url: string
-		},
+			url: string;
+		};
 	};
-	isPriority?: boolean
+	isPriority?: boolean;
 };
 
 const MediaStack = (props: Props) => {
-	const {
-		data,
-		isPriority = false
-	} = props;
+	const { data, isPriority = false } = props;
 
 	const useVideo = data?.useVideo && data?.video?.url;
 	const useImage = !data?.useVideo && data?.image?.url;
 
 	const { ref, inView } = useInView({
 		triggerOnce: true,
-		threshold: 0.2,
-		rootMargin: '-5%',
+		threshold: 0.1,
+		rootMargin: '-5%'
 	});
 
 	return (
 		<MediaStackWrapper ref={ref}>
 			{useVideo && <VideoComponent data={data.video} inView={inView} />}
-			{useImage && <ImageComponent data={data.image} isPriority={false} />}
+			{useImage && (
+				<ImageComponent data={data.image} isPriority={false} />
+			)}
 		</MediaStackWrapper>
 	);
 };

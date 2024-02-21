@@ -62,4 +62,7 @@ export type ProjectType = {
 	studioLink?: string;
 	pageBuilderIsActive?: boolean;
 	setPageBuilderIsActive: (isActive: boolean) => void;
+	activeProject: boolean | number;
+	setActiveProject: (value: boolean | number) => void;
+	index: number;
 };
