@@ -17,7 +17,7 @@ export const infoPageQueryString = `
 `;
 
 export const projectsQueryString = `
-	*[_type == 'project'] {
+	*[_type == 'project'] | order(orderRank) [0...100] {
 		...,
 		"thumbnailVideo": thumbnailVideo.asset->playbackId,
 		"thumbnailImage": thumbnailImage.asset->url,
