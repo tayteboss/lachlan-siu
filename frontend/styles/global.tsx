@@ -6,7 +6,8 @@ export const GlobalStyles = createGlobalStyle`
 	:root {
 		--colour-white: ${theme.colours.white};
 		--colour-black: ${theme.colours.black};
-		--font-default: ${theme.fonts.default};
+		--font-regular: ${theme.fonts.regular};
+		--font-medium: ${theme.fonts.medium};
 		--transition-speed-default: ${theme.transitionSpeed.default};
 		--transition-speed-fast: ${theme.transitionSpeed.fast};
 		--transition-speed-extra-fast: ${theme.transitionSpeed.extraFast};
@@ -57,7 +58,7 @@ export const GlobalStyles = createGlobalStyle`
 	button,
 	label,
 	body {
-		font-family: var(--font-default);
+		font-family: var(--font-regular);
 		color: var(--colour-black);
 		line-height: normal;
 	}
@@ -84,9 +85,11 @@ export const GlobalStyles = createGlobalStyle`
 	.type-h1 {
 		font-size: ${pxToRem(65)};
 		line-height: ${pxToRem(74)};
-		font-weight: 500;
+		font-family: var(--font-medium);
+		font-weight: 300;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait} {
+			font-family: var(--font-regular);
 			font-size: ${pxToRem(25)};
 			line-height: ${pxToRem(32)};
 		}
@@ -96,18 +99,25 @@ export const GlobalStyles = createGlobalStyle`
 	.type-h2 {
 		font-size: ${pxToRem(28)};
 		line-height: ${pxToRem(35)};
-		font-weight: 500;
+		font-family: var(--font-medium);
+		font-weight: 300;
+
+		@media ${theme.mediaBreakpoints.tabletPortrait} {
+			font-family: var(--font-regular);
+		}
 	}
 
 	h3,
 	.type-h3 {
 		font-size: ${pxToRem(25)};
 		line-height: ${pxToRem(33)};
-		font-weight: 500;
+		font-family: var(--font-regular);
+		font-weight: 300;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait} {
 			font-size: ${pxToRem(17)};
 			line-height: ${pxToRem(23)};
+			font-family: var(--font-regular);
 		}
 	}
 
@@ -120,7 +130,8 @@ export const GlobalStyles = createGlobalStyle`
 	div {
 		font-size: ${pxToRem(18)};
 		line-height: ${pxToRem(24)};
-		font-weight: 500;
+		font-family: var(--font-regular);
+		font-weight: 300;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait} {
 			font-size: ${pxToRem(13)};
@@ -194,10 +205,11 @@ export const GlobalStyles = createGlobalStyle`
 		h4 {
 			font-size: ${pxToRem(20)};
 			line-height: ${pxToRem(24)};
-			font-weight: 600;
+			font-weight: 300;
 
 			@media ${theme.mediaBreakpoints.tabletPortrait} {
 				font-size: ${pxToRem(17)};
+				font-family: var(--font-medium);
 			}
 		}
 

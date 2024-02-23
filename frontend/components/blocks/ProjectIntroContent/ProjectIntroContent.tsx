@@ -12,8 +12,10 @@ const ProjectIntroContentWrapper = styled.div`
 	justify-content: space-between;
 	height: 100%;
 	margin-bottom: ${pxToRem(32)};
+	padding-left: ${pxToRem(24)};
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		padding: 0 ${pxToRem(16)};
 		grid-column: 1 / -1;
 		order: 2;
 	}
@@ -28,6 +30,7 @@ const Title = styled.h2`
 		font-size: ${pxToRem(17)};
 		line-height: ${pxToRem(23)};
 		margin-bottom: ${pxToRem(16)};
+		font-family: var(--font-medium);
 	}
 `;
 

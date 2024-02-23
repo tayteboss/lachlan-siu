@@ -5,6 +5,7 @@ import LayoutGrid from '../../common/LayoutGrid';
 import ClientList from '../ClientList';
 import pxToRem from '../../../utils/pxToRem';
 import { ClientType } from '../../../shared/types/types';
+import Logo from '../../elements/Logo';
 
 type Props = {
 	isActive: boolean;
@@ -56,7 +57,7 @@ const IntroWrapper = styled.div`
 	padding: ${pxToRem(120)} 0 ${pxToRem(64)};
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		padding: calc(var(--header-h) + 24px) 0 ${pxToRem(36)};
+		padding: calc(var(--header-h) + 80px) 0 ${pxToRem(36)};
 	}
 `;
 
@@ -77,9 +78,25 @@ const SocialLink = styled.a`
 	font-size: ${pxToRem(28)};
 	line-height: ${pxToRem(35)};
 	text-decoration: none;
+	font-family: var(--font-medium);
 
 	&:hover {
 		text-decoration: underline;
+	}
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		font-family: var(--font-regular);
+		font-size: ${pxToRem(25)};
+		line-height: ${pxToRem(32)};
+	}
+`;
+
+const MobileLogo = styled.div`
+	display: none;
+
+	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
+		display: block;
+		margin-bottom: ${pxToRem(24)};
 	}
 `;
 
@@ -108,6 +125,9 @@ const InfoModal = (props: Props) => {
 						<Inner>
 							{introContent && (
 								<IntroWrapper>
+									<MobileLogo>
+										<Logo />
+									</MobileLogo>
 									<Intro>{introContent}</Intro>
 								</IntroWrapper>
 							)}

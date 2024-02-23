@@ -13,10 +13,6 @@ type Props = {
 const HeaderTriggerWrapper = styled.button<StyledProps>`
 	flex: 1;
 	text-align: ${(props) => props.$align};
-
-	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		display: none;
-	}
 `;
 
 const HeaderTrigger = (props: Props) => {

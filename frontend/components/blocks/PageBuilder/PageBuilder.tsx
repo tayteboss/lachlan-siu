@@ -54,6 +54,10 @@ const Outer = styled(motion.div)``;
 
 const Inner = styled.div`
 	padding-bottom: ${pxToRem(62)};
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		padding-top: ${pxToRem(24)};
+	}
 `;
 
 const PageBuilder = (props: Props) => {

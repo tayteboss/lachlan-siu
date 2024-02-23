@@ -27,19 +27,6 @@ import MobileMenu from '../components/elements/MobileMenu';
 import throttle from 'lodash.throttle';
 import useViewportWidth from '../hooks/useViewportWidth';
 
-type StyledProps = {
-	$isActive: boolean;
-};
-
-const PageWrapper = styled(motion.div)``;
-
-const ZoomWrapper = styled.div<StyledProps>`
-	transform: ${(props) => (props.$isActive ? 'scale(0.997)' : 'scale(1)')};
-	opacity: ${(props) => (props.$isActive ? 0.5 : 1)};
-
-	transition: all 500ms var(--transition-ease);
-`;
-
 type Props = {
 	data: HomePageType;
 	siteSettings: SiteSettingsType;
@@ -47,6 +34,8 @@ type Props = {
 	pageTransitionVariants: TransitionsType;
 	infoPage: InfoPageType;
 };
+
+const PageWrapper = styled(motion.div)``;
 
 const Page = (props: Props) => {
 	const { data, siteSettings, projects, infoPage, pageTransitionVariants } =
@@ -130,36 +119,32 @@ const Page = (props: Props) => {
 				setInfoModalIsActive={setInfoModalIsActive}
 				isActive={isHeaderActive}
 			/>
-			<MobileMenu
+			{/* <MobileMenu
 				projectsModalIsActive={projectsModalIsActive}
 				infoModalIsActive={infoModalIsActive}
 				setProjectsModalIsActive={setProjectsModalIsActive}
 				setInfoModalIsActive={setInfoModalIsActive}
-			/>
+			/> */}
 			<ReactLenis root>
-				<ZoomWrapper
-					$isActive={projectsModalIsActive || infoModalIsActive}
-				>
-					<HomeIntro data={data?.introContent} />
-					<ProjectsList
-						data={projects}
-						activeProject={activeProject}
-						setActiveProject={setActiveProject}
-					/>
-					<Footer
-						email={siteSettings?.email}
-						acknowledgementOfCountry={
-							siteSettings?.acknowledgementOfCountry
-						}
-					/>
-				</ZoomWrapper>
+				<HomeIntro data={data?.introContent} />
+				<ProjectsList
+					data={projects}
+					activeProject={activeProject}
+					setActiveProject={setActiveProject}
+				/>
+				<Footer
+					email={siteSettings?.email}
+					acknowledgementOfCountry={
+						siteSettings?.acknowledgementOfCountry
+					}
+				/>
 				<InfoModal
 					isActive={infoModalIsActive}
 					instagramUrl={siteSettings?.instagramUrl}
 					linkedInUrl={siteSettings?.linkedInUrl}
 					clientList={infoPage?.clientList}
 					pastList={infoPage?.pastList}
-					introContent={infoPage?.introContent}
+					introContent={data?.introContent}
 					email={siteSettings?.email}
 				/>
 				<ProjectsModal

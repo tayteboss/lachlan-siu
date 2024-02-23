@@ -11,11 +11,6 @@ export default {
 			initialValue: 'Info Page'
 		},
 		{
-			title: "Intro Content",
-			name: "introContent",
-			type: "string"
-		},
-		{
 			title: "Past List",
 			name: "pastList",
 			type: "array",

@@ -19,9 +19,7 @@ type Props = {
 
 const HeaderWrapper = styled.header<StyledProps>`
 	padding: ${pxToRem(15)} 0;
-	background: rgba(255, 255, 255, 0.75);
-	backdrop-filter: blur(5px);
-	-webkit-backdrop-filter: blur(5px);
+	background: var(--colour-white);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -30,11 +28,6 @@ const HeaderWrapper = styled.header<StyledProps>`
 	z-index: 100;
 
 	transition: all var(--transition-speed-default) var(--transition-ease);
-
-	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		position: relative;
-		transform: translateY(0);
-	}
 `;
 
 const Inner = styled.div`
@@ -45,6 +38,16 @@ const Inner = styled.div`
 
 const Title = styled(motion.div)<StyledProps>`
 	text-decoration: ${(props) => props.isActive && 'underline'};
+
+	&.type-h3 {
+		font-size: ${pxToRem(25)};
+	}
+`;
+
+const DesktopLogo = styled.div`
+	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
+		display: none;
+	}
 `;
 
 const wrapperVariants = {
@@ -111,7 +114,9 @@ const Header = (props: Props) => {
 							)}
 						</AnimatePresence>
 					</HeaderTrigger>
-					<Logo />
+					<DesktopLogo>
+						<Logo />
+					</DesktopLogo>
 					<HeaderTrigger
 						align="right"
 						handleClick={() => {

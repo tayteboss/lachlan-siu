@@ -1,5 +1,11 @@
-/* @font-face {
-	font-family: 'HaasGrot';
-	src: url('/fonts/HaasGrotDisp-55Roman.woff2') format('woff2'), url('/fonts/HaasGrotDisp-55Roman.woff') format('woff'), url('/fonts/HaasGrotDisp-55Roman.ttf') format('truetype'), url('/fonts/HaasGrotDisp-55Roman.otf') format('opentype');
+@font-face {
+	font-family: 'Saans-Medium';
+	src: url('/fonts/Saans-Medium-1.woff2') format('woff2'), url('/fonts/Saans-Medium-1.woff') format('woff');
 	font-display: swap;
-} */
+}
+
+@font-face {
+	font-family: 'Saans-Regular';
+	src: url('/fonts/Saans-Regular-1.woff2') format('woff2'), url('/fonts/Saans-Regular-1.woff') format('woff');
+	font-display: swap;
+}

@@ -10,11 +10,13 @@ type Props = {
 
 const ProjectThumbnailWrapper = styled.div`
 	grid-column: 7 / -1;
+	padding-right: ${pxToRem(24)};
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		grid-column: 1 / -1;
 		order: 1;
 		margin-bottom: ${pxToRem(28)};
+		padding: 0;
 	}
 `;
 
