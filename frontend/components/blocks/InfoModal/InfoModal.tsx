@@ -47,6 +47,12 @@ const InfoModalWrapper = styled(motion.div)`
 	z-index: 90;
 	pointer-events: all;
 	overflow: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 `;
 
 const Inner = styled.div`
