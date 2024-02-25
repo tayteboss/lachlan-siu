@@ -44,7 +44,7 @@ const Title = styled(motion.div)<StyledProps>`
 	}
 `;
 
-const DesktopLogo = styled.div`
+const DesktopLogo = styled.button`
 	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
 		display: none;
 	}
@@ -114,7 +114,12 @@ const Header = (props: Props) => {
 							)}
 						</AnimatePresence>
 					</HeaderTrigger>
-					<DesktopLogo>
+					<DesktopLogo
+						onClick={() => {
+							setProjectsModalIsActive(false);
+							setInfoModalIsActive(false);
+						}}
+					>
 						<Logo />
 					</DesktopLogo>
 					<HeaderTrigger

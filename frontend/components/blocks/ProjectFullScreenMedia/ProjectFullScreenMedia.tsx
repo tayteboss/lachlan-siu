@@ -20,6 +20,7 @@ const Outer = styled.div`
 `;
 
 const Inner = styled.div`
+	background: #f3f3f3;
 	position: absolute;
 	top: 0;
 	left: 0;

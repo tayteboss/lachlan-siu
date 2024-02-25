@@ -16,17 +16,15 @@ const wrapperVariants = {
 	hidden: {
 		opacity: 0,
 		transition: {
-			duration: 0.5,
-			ease: 'easeInOut',
-			when: 'beforeChildren'
+			duration: 0.4,
+			ease: 'easeInOut'
 		}
 	},
 	visible: {
 		opacity: 1,
 		transition: {
-			duration: 0.5,
-			ease: 'easeInOut',
-			when: 'afterChildren'
+			duration: 0.4,
+			ease: 'easeInOut'
 		}
 	}
 };
