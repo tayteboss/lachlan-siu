@@ -33,13 +33,22 @@ type Props = {
 	projects: ProjectType[];
 	pageTransitionVariants: TransitionsType;
 	infoPage: InfoPageType;
+	setAppCursorRefresh: (refresh: number) => void;
+	appCursorRefresh: number;
 };
 
 const PageWrapper = styled(motion.div)``;
 
 const Page = (props: Props) => {
-	const { data, siteSettings, projects, infoPage, pageTransitionVariants } =
-		props;
+	const {
+		data,
+		siteSettings,
+		projects,
+		infoPage,
+		pageTransitionVariants,
+		setAppCursorRefresh,
+		appCursorRefresh
+	} = props;
 
 	const [projectsModalIsActive, setProjectsModalIsActive] = useState(false);
 	const [infoModalIsActive, setInfoModalIsActive] = useState(false);
@@ -81,6 +90,14 @@ const Page = (props: Props) => {
 		} else {
 			lenis?.start();
 		}
+
+		setAppCursorRefresh(appCursorRefresh + 1);
+
+		const timer = setTimeout(() => {
+			setAppCursorRefresh(appCursorRefresh + 1);
+		}, 250);
+
+		return () => clearTimeout(timer);
 	}, [lenis, projectsModalIsActive, infoModalIsActive]);
 
 	useEffect(() => {

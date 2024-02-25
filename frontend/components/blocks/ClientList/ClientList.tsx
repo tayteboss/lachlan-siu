@@ -50,6 +50,7 @@ const ClientList = (props: Props) => {
 								className="type-h1"
 								href={item?.url}
 								target="_blank"
+								key={i}
 							>
 								{item?.title || ''}
 							</LinkTag>

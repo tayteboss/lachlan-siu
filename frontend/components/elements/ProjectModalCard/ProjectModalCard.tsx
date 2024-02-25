@@ -89,6 +89,7 @@ const ProjectModalCard = (props: Props) => {
 		<ProjectModalCardWrapper
 			onClick={() => handleClick()}
 			variants={childVariants}
+			className="text-link"
 		>
 			<Inner>
 				{thumbnailVideo && (

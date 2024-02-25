@@ -6,7 +6,7 @@ import pxToRem from '../../../utils/pxToRem';
 import { AnimatePresence, motion } from 'framer-motion';
 
 type StyledProps = {
-	isActive?: boolean;
+	$isActive?: boolean;
 };
 
 type Props = {
@@ -37,7 +37,7 @@ const Inner = styled.div`
 `;
 
 const Title = styled(motion.div)<StyledProps>`
-	text-decoration: ${(props) => props.isActive && 'underline'};
+	text-decoration: ${(props) => props.$isActive && 'underline'};
 
 	&.type-h3 {
 		font-size: ${pxToRem(25)};
@@ -95,7 +95,7 @@ const Header = (props: Props) => {
 									animate="visible"
 									exit="hidden"
 									key={1}
-									isActive
+									$isActive={true}
 									className="type-h3"
 								>
 									Close
@@ -136,7 +136,7 @@ const Header = (props: Props) => {
 									initial="hidden"
 									animate="visible"
 									exit="hidden"
-									isActive
+									$isActive={true}
 									key={3}
 									className="type-h3"
 								>
