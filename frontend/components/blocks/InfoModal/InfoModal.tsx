@@ -49,10 +49,10 @@ const InfoModalWrapper = styled(motion.div)`
 	overflow: auto;
 
 	&::-webkit-scrollbar {
-		display: none;
+		width: 0;
 	}
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none;
+	scrollbar-width: 0;
 `;
 
 const Inner = styled.div`
