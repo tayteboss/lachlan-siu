@@ -6,6 +6,9 @@ import pxToRem from '../../../utils/pxToRem';
 type Props = {
 	thumbnailImage: string | undefined;
 	thumbnailVideo: string | undefined;
+	pageBuilderIsActive: boolean;
+	setPageBuilderIsActive: (value: boolean) => void;
+	showContent: boolean;
 };
 
 const ProjectThumbnailWrapper = styled.div`
@@ -41,10 +44,51 @@ const MediaWrapper = styled.div`
 `;
 
 const ProjectThumbnail = (props: Props) => {
-	const { thumbnailImage, thumbnailVideo } = props;
+	const {
+		thumbnailImage,
+		thumbnailVideo,
+		showContent,
+		pageBuilderIsActive,
+		setPageBuilderIsActive
+	} = props;
 
-	return (
-		<ProjectThumbnailWrapper>
+	return !pageBuilderIsActive ? (
+		<ProjectThumbnailWrapper
+			className={`${showContent ? 'text-link' : ''}`}
+			onClick={() => setPageBuilderIsActive(!pageBuilderIsActive)}
+		>
+			<Inner>
+				{thumbnailVideo && (
+					<MediaWrapper>
+						<MuxPlayer
+							streamType="on-demand"
+							playbackId={thumbnailVideo}
+							autoPlay="muted"
+							loop={true}
+							thumbnailTime={1}
+							preload="auto"
+							muted
+							playsInline={true}
+						/>
+					</MediaWrapper>
+				)}
+				{thumbnailImage && (
+					<MediaWrapper>
+						<Image
+							src={thumbnailImage}
+							fill
+							style={{ objectFit: 'cover' }}
+							alt="Project thumbnail"
+						/>
+					</MediaWrapper>
+				)}
+			</Inner>
+		</ProjectThumbnailWrapper>
+	) : (
+		<ProjectThumbnailWrapper
+			className={`${showContent ? 'text-link-close' : ''}`}
+			onClick={() => setPageBuilderIsActive(!pageBuilderIsActive)}
+		>
 			<Inner>
 				{thumbnailVideo && (
 					<MediaWrapper>

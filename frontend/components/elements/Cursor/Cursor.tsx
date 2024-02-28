@@ -85,6 +85,8 @@ const Text = styled(motion.div)`
 const Cursor = ({ cursorRefresh }: Props) => {
 	const [isHoveringLink, setIsHoveringLink] = useState(false);
 	const [isHoveringTextLink, setIsHoveringTextLink] = useState(false);
+	const [isHoveringTextLinkClose, setIsHoveringTextLinkClose] =
+		useState(false);
 	const [isOnDevice, setIsOnDevice] = useState(false);
 	const position = useMousePosition();
 	const router = useRouter();
@@ -116,6 +118,7 @@ const Cursor = ({ cursorRefresh }: Props) => {
 		const buttonTags = document.querySelectorAll('button');
 		const cursorLinks = document.querySelectorAll('.cursor-link');
 		const textLinks = document.querySelectorAll('.text-link');
+		const textLinksClose = document.querySelectorAll('.text-link-close');
 
 		aTags.forEach((link) => {
 			link.addEventListener('mouseenter', () => {
@@ -147,11 +150,29 @@ const Cursor = ({ cursorRefresh }: Props) => {
 		textLinks.forEach((link) => {
 			link.addEventListener('mouseenter', () => {
 				setIsHoveringTextLink(true);
+				setIsHoveringTextLinkClose(false);
 			});
 			link.addEventListener('mouseleave', () => {
 				setIsHoveringTextLink(false);
+				setIsHoveringTextLinkClose(false);
 			});
 			link.addEventListener('click', () => {
+				setIsHoveringTextLink(false);
+				setIsHoveringTextLinkClose(false);
+			});
+		});
+
+		textLinksClose.forEach((link) => {
+			link.addEventListener('mouseenter', () => {
+				setIsHoveringTextLinkClose(true);
+				setIsHoveringTextLink(false);
+			});
+			link.addEventListener('mouseleave', () => {
+				setIsHoveringTextLinkClose(false);
+				setIsHoveringTextLink(false);
+			});
+			link.addEventListener('click', () => {
+				setIsHoveringTextLinkClose(false);
 				setIsHoveringTextLink(false);
 			});
 		});
@@ -177,20 +198,23 @@ const Cursor = ({ cursorRefresh }: Props) => {
 	// reset cursor on page change
 	useEffect(() => {
 		clearCursor();
-	}, [router.pathname, router.asPath, router.query.slug]);
+	}, [router.pathname, router.asPath, router.query.slug, cursorRefresh]);
 
 	return (
 		<>
 			<CursorWrapper $isOnDevice={isOnDevice} className="cursor-wrapper">
 				<CursorRing
 					$isHoveringLink={isHoveringLink}
-					$isHoveringTextLink={isHoveringTextLink}
+					$isHoveringTextLink={
+						isHoveringTextLink || isHoveringTextLinkClose
+					}
 					variants={variantsWrapper}
 					animate="visible"
 					layout
 				>
 					<AnimatePresence>
-						{isHoveringTextLink && <Text>More</Text>}
+						{isHoveringTextLink && <Text key={1}>More</Text>}
+						{isHoveringTextLinkClose && <Text key={2}>Less</Text>}
 					</AnimatePresence>
 				</CursorRing>
 			</CursorWrapper>

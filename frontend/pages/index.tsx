@@ -104,6 +104,14 @@ const Page = (props: Props) => {
 		if (activeProject) {
 			setHeaderIsActive(false);
 		}
+
+		setAppCursorRefresh(appCursorRefresh + 1);
+
+		const timer = setTimeout(() => {
+			setAppCursorRefresh(appCursorRefresh + 1);
+		}, 500);
+
+		return () => clearTimeout(timer);
 	}, [activeProject]);
 
 	useEffect(() => {

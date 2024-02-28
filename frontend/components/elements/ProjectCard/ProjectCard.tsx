@@ -88,6 +88,9 @@ const ProjectCard = (props: ProjectType) => {
 					<ProjectThumbnail
 						thumbnailImage={thumbnailImage}
 						thumbnailVideo={thumbnailVideo}
+						pageBuilderIsActive={pageBuilderIsActive}
+						setPageBuilderIsActive={setPageBuilderIsActive}
+						showContent={showContent}
 					/>
 				</LayoutGrid>
 			</Inner>

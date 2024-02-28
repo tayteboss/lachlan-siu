@@ -68,6 +68,7 @@ const ProjectIntroContent = (props: ProjectType) => {
 				<TriggerWrapper>
 					<PageBuilderTrigger
 						isActive={pageBuilderIsActive}
+						pageBuilderIsActive={pageBuilderIsActive}
 						setPageBuilderIsActive={setPageBuilderIsActive}
 					/>
 				</TriggerWrapper>

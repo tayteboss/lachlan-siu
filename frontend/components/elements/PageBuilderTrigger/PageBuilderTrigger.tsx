@@ -7,6 +7,7 @@ type StyledProps = {
 
 type Props = {
 	isActive: boolean | undefined;
+	pageBuilderIsActive: boolean | undefined;
 	setPageBuilderIsActive: (isActive: boolean) => void;
 };
 
@@ -58,11 +59,12 @@ const Right = styled.div<StyledProps>`
 `;
 
 const PageBuilderTrigger = (props: Props) => {
-	const { isActive, setPageBuilderIsActive } = props;
+	const { isActive, pageBuilderIsActive, setPageBuilderIsActive } = props;
 
 	return (
 		<PageBuilderTriggerWrapper
 			onClick={() => setPageBuilderIsActive(!isActive)}
+			className={pageBuilderIsActive ? 'text-link-close' : 'text-link'}
 		>
 			<Base />
 			<Left $isActive={isActive} />
