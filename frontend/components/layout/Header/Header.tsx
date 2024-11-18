@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 type StyledProps = {
 	$isActive?: boolean;
+	infoModalIsActive?: boolean;
 };
 
 type Props = {
@@ -19,7 +20,10 @@ type Props = {
 
 const HeaderWrapper = styled.header<StyledProps>`
 	padding: ${pxToRem(15)} 0;
-	background: var(--colour-white);
+	background: ${(props) =>
+		props.infoModalIsActive
+			? 'var(--colour-black)'
+			: 'var(--colour-white)'};
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -27,7 +31,14 @@ const HeaderWrapper = styled.header<StyledProps>`
 	transform: translateY(${(props) => (props.$isActive ? '0' : '-100%')});
 	z-index: 100;
 
-	transition: all var(--transition-speed-default) var(--transition-ease);
+	transition: all 500ms var(--transition-ease);
+
+	* {
+		color: ${(props) =>
+			props.infoModalIsActive
+				? 'var(--colour-white)'
+				: 'var(--colour-black)'};
+	}
 `;
 
 const Inner = styled.div`
@@ -39,12 +50,16 @@ const Inner = styled.div`
 const Title = styled(motion.div)<StyledProps>`
 	text-decoration: ${(props) => props.$isActive && 'underline'};
 
+	transition: all 500ms var(--transition-ease);
+
 	&.type-h3 {
 		font-size: ${pxToRem(25)};
 	}
 `;
 
 const DesktopLogo = styled.button`
+	transition: all 500ms var(--transition-ease);
+
 	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
 		display: none;
 	}
@@ -77,7 +92,11 @@ const Header = (props: Props) => {
 	} = props;
 
 	return (
-		<HeaderWrapper className="header" $isActive={isActive}>
+		<HeaderWrapper
+			className="header"
+			$isActive={isActive}
+			infoModalIsActive={infoModalIsActive}
+		>
 			<LayoutWrapper>
 				<Inner>
 					<HeaderTrigger

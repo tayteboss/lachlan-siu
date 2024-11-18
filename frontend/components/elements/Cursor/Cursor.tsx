@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useMousePosition } from '../../../hooks/useMousePosition';
 import pxToRem from '../../../utils/pxToRem';
+import Arrow from '../../icons/Arrow';
 
 type Props = {
 	cursorRefresh: () => void;
@@ -13,6 +14,8 @@ type StyledProps = {
 	$isHoveringLink?: boolean;
 	$isOnDevice?: boolean;
 	$isHoveringTextLink?: boolean;
+	$isHoveringArrow?: boolean;
+	$isMouseDown?: boolean;
 };
 
 const CursorWrapper = styled.div<StyledProps>`
@@ -21,6 +24,7 @@ const CursorWrapper = styled.div<StyledProps>`
 	z-index: 1000;
 	position: fixed;
 	display: ${(props) => (props.$isOnDevice ? 'none' : 'block')};
+	mix-blend-mode: difference;
 
 	transition: opacity ${(props) => props.theme.transitionSpeed.default} ease;
 	transition-delay: 500ms;
@@ -31,43 +35,52 @@ const CursorWrapper = styled.div<StyledProps>`
 `;
 
 const CursorRing = styled(motion.div)<StyledProps>`
-	mix-blend-mode: normal;
 	position: fixed;
 	display: flex;
 	flex-flow: row;
 	align-content: center;
 	justify-content: center;
 	top: ${(props) =>
-		props.$isHoveringTextLink
+		props.$isHoveringArrow
+			? '-12px'
+			: props.$isHoveringTextLink
 			? '-12px'
 			: props.$isHoveringLink
 			? '-12px'
 			: '-6px'};
 	left: ${(props) =>
-		props.$isHoveringTextLink
+		props.$isMouseDown
+			? '-21px'
+			: props.$isHoveringArrow
+			? '-18px'
+			: props.$isHoveringTextLink
 			? '-25px'
 			: props.$isHoveringLink
 			? '-12px'
 			: '-6px'};
 	height: ${(props) =>
-		props.$isHoveringTextLink
+		props.$isHoveringArrow
+			? '24px'
+			: props.$isHoveringTextLink
 			? '24px'
 			: props.$isHoveringLink
 			? '24px'
 			: '12px'};
 	width: ${(props) =>
-		props.$isHoveringTextLink
+		props.$isMouseDown
+			? '42px'
+			: props.$isHoveringArrow
+			? '36px'
+			: props.$isHoveringTextLink
 			? '50px'
 			: props.$isHoveringLink
 			? '24px'
 			: '12px'};
-	background: var(--colour-black);
+	background: var(--colour-white);
 	border-radius: 100px;
 	pointer-events: none;
 	text-align: center;
 	z-index: 2;
-	border: 1px solid var(--colour-white);
-	padding: ${pxToRem(2)} ${pxToRem(4)};
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -79,7 +92,18 @@ const CursorRing = styled(motion.div)<StyledProps>`
 const Text = styled(motion.div)`
 	font-size: ${pxToRem(14)};
 	line-height: 1;
-	color: var(--colour-white);
+	color: var(--colour-black);
+`;
+
+const IconWrapper = styled.div<{ $isNext: boolean }>`
+	padding: ${pxToRem(5)} ${pxToRem(10)};
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	svg {
+		transform: scale(${(props) => (props.$isNext ? 1 : -1)});
+	}
 `;
 
 const Cursor = ({ cursorRefresh }: Props) => {
@@ -87,6 +111,9 @@ const Cursor = ({ cursorRefresh }: Props) => {
 	const [isHoveringTextLink, setIsHoveringTextLink] = useState(false);
 	const [isHoveringTextLinkClose, setIsHoveringTextLinkClose] =
 		useState(false);
+	const [isHoveringNext, setIsHoveringNext] = useState(false);
+	const [isHoveringPrev, setIsHoveringPrev] = useState(false);
+	const [isMouseDown, setIsMouseDown] = useState(false);
 	const [isOnDevice, setIsOnDevice] = useState(false);
 	const position = useMousePosition();
 	const router = useRouter();
@@ -118,7 +145,8 @@ const Cursor = ({ cursorRefresh }: Props) => {
 		const buttonTags = document.querySelectorAll('button');
 		const cursorLinks = document.querySelectorAll('.cursor-link');
 		const textLinks = document.querySelectorAll('.text-link');
-		const textLinksClose = document.querySelectorAll('.text-link-close');
+		const prevLinks = document.querySelectorAll('.cursor-prev');
+		const nextLinks = document.querySelectorAll('.cursor-next');
 
 		aTags.forEach((link) => {
 			link.addEventListener('mouseenter', () => {
@@ -162,18 +190,37 @@ const Cursor = ({ cursorRefresh }: Props) => {
 			});
 		});
 
-		textLinksClose.forEach((link) => {
+		prevLinks.forEach((link) => {
 			link.addEventListener('mouseenter', () => {
-				setIsHoveringTextLinkClose(true);
-				setIsHoveringTextLink(false);
+				setIsHoveringPrev(true);
+				setIsHoveringNext(false);
 			});
 			link.addEventListener('mouseleave', () => {
-				setIsHoveringTextLinkClose(false);
-				setIsHoveringTextLink(false);
+				setIsHoveringPrev(false);
+				setIsHoveringNext(false);
 			});
-			link.addEventListener('click', () => {
-				setIsHoveringTextLinkClose(false);
-				setIsHoveringTextLink(false);
+			link.addEventListener('mousedown', () => {
+				setIsMouseDown(true);
+			});
+			link.addEventListener('mouseup', () => {
+				setIsMouseDown(false);
+			});
+		});
+
+		nextLinks.forEach((link) => {
+			link.addEventListener('mouseenter', () => {
+				setIsHoveringNext(true);
+				setIsHoveringPrev(false);
+			});
+			link.addEventListener('mouseleave', () => {
+				setIsHoveringNext(false);
+				setIsHoveringPrev(false);
+			});
+			link.addEventListener('mousedown', () => {
+				setIsMouseDown(true);
+			});
+			link.addEventListener('mouseup', () => {
+				setIsMouseDown(false);
 			});
 		});
 
@@ -208,6 +255,8 @@ const Cursor = ({ cursorRefresh }: Props) => {
 					$isHoveringTextLink={
 						isHoveringTextLink || isHoveringTextLinkClose
 					}
+					$isHoveringArrow={isHoveringNext || isHoveringPrev}
+					$isMouseDown={isMouseDown}
 					variants={variantsWrapper}
 					animate="visible"
 					layout
@@ -215,6 +264,16 @@ const Cursor = ({ cursorRefresh }: Props) => {
 					<AnimatePresence>
 						{isHoveringTextLink && <Text key={1}>More</Text>}
 						{isHoveringTextLinkClose && <Text key={2}>Less</Text>}
+						{isHoveringNext && (
+							<IconWrapper key={3} $isNext={true}>
+								<Arrow />
+							</IconWrapper>
+						)}
+						{isHoveringPrev && (
+							<IconWrapper key={3} $isNext={false}>
+								<Arrow />
+							</IconWrapper>
+						)}
 					</AnimatePresence>
 				</CursorRing>
 			</CursorWrapper>

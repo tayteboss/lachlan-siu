@@ -5,6 +5,8 @@ const LogoWrapper = styled.div`
 	flex: 1;
 	text-align: center;
 
+	transition: all 500ms var(--transition-ease);
+
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		text-align: left;
 

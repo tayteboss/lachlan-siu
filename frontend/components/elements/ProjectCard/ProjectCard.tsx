@@ -1,106 +1,44 @@
 import styled from 'styled-components';
-import LayoutWrapper from '../../common/LayoutWrapper';
 import ProjectIntroContent from '../../blocks/ProjectIntroContent';
-import ProjectThumbnail from '../../blocks/ProjectThumbnail';
 import pxToRem from '../../../utils/pxToRem';
-import LayoutGrid from '../../common/LayoutGrid';
 import { ProjectType } from '../../../shared/types/types';
-import { useEffect, useState } from 'react';
-import PageBuilder from '../../blocks/PageBuilder';
+import ProjectCarousel from '../../blocks/ProjectCarousel';
+import { useState } from 'react';
 
 const ProjectCardWrapper = styled.div`
-	border-bottom: 1px solid var(--colour-black);
-
-	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		border-bottom: none;
-
-		&:last-child > .project-inner {
-			border-bottom: 1px solid var(--colour-black);
-			padding: ${pxToRem(24)} 0;
-		}
-	}
+	margin-bottom: ${pxToRem(80)};
 `;
 
 const Inner = styled.div`
-	padding: ${pxToRem(24)} 0;
+	padding: 0 ${pxToRem(120)};
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		padding: ${pxToRem(24)} 0 0 0;
+		padding: 0 ${pxToRem(16)};
 	}
 `;
 
 const ProjectCard = (props: ProjectType) => {
-	const {
-		title,
-		pageBuilder,
-		scope,
-		studio,
-		excerpt,
-		showContent,
-		studioLink,
-		thumbnailImage,
-		thumbnailVideo,
-		activeProject,
-		setActiveProject,
-		index
-	} = props;
+	const { title, thumbnailImage, thumbnailVideo, carousel, index } = props;
 
-	const [pageBuilderIsActive, setPageBuilderIsActive] = useState(
-		activeProject === index
-	);
-
-	useEffect(() => {
-		if (pageBuilderIsActive) {
-			setActiveProject(index);
-		} else {
-			setActiveProject(false);
-		}
-	}, [pageBuilderIsActive]);
-
-	useEffect(() => {
-		if (activeProject === index) {
-			setPageBuilderIsActive(true);
-		} else {
-			setPageBuilderIsActive(false);
-		}
-	}, [activeProject, index]);
+	const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+	const [carouselLength, setCarouselLength] = useState(1);
 
 	return (
 		<ProjectCardWrapper id={`project-${index}`}>
-			<Inner
-				onClick={() => {
-					if (!showContent) return;
-					setPageBuilderIsActive(!pageBuilderIsActive);
-				}}
-				className="project-inner"
-			>
-				<LayoutGrid>
-					<ProjectIntroContent
-						title={title}
-						scope={scope}
-						studio={studio}
-						excerpt={excerpt}
-						showContent={showContent}
-						studioLink={studioLink}
-						pageBuilderIsActive={pageBuilderIsActive}
-						setPageBuilderIsActive={setPageBuilderIsActive}
-					/>
-					<ProjectThumbnail
-						thumbnailImage={thumbnailImage}
-						thumbnailVideo={thumbnailVideo}
-						pageBuilderIsActive={pageBuilderIsActive}
-						setPageBuilderIsActive={setPageBuilderIsActive}
-						showContent={showContent}
-					/>
-				</LayoutGrid>
-			</Inner>
-			<LayoutWrapper>
-				<PageBuilder
-					isActive={pageBuilderIsActive}
-					data={pageBuilder}
-					index={index}
+			<Inner className="project-inner">
+				<ProjectCarousel
+					thumbnailImage={thumbnailImage}
+					thumbnailVideo={thumbnailVideo}
+					carousel={carousel}
+					setActiveSlideIndex={setActiveSlideIndex}
+					setCarouselLength={setCarouselLength}
 				/>
-			</LayoutWrapper>
+				<ProjectIntroContent
+					title={title}
+					activeSlideIndex={activeSlideIndex}
+					carouselLength={carouselLength}
+				/>
+			</Inner>
 		</ProjectCardWrapper>
 	);
 };

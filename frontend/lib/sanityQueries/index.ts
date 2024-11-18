@@ -21,15 +21,10 @@ export const projectsQueryString = `
 		...,
 		"thumbnailVideo": thumbnailVideo.asset->playbackId,
 		"thumbnailImage": thumbnailImage.asset->url,
-		pageBuilder[]{
+		carousel[]{
 			...,
 			"image": image.asset->url,
-			"leftImage": leftImage.asset->url,
-			"leftVideo": leftVideo.asset->playbackId,
-			"rightImage": rightImage.asset->url,
-			"rightVideo": rightVideo.asset->playbackId,
 			"video": video.asset->playbackId,
 		},
 	}
 `;
-

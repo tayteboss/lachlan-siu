@@ -36,6 +36,7 @@ export type SiteSettingsType = {
 	linkedInUrl: string;
 	siteDescription: string;
 	siteTitle: string;
+	projectsModalCTA: string;
 };
 
 export type ImageType = {
@@ -52,16 +53,16 @@ export type MuxVideoType = {
 
 export type ProjectType = {
 	title?: string;
-	pageBuilder?: [];
-	scope?: string;
+	carousel?: [];
+	// scope?: string;
 	thumbnailImage?: string;
 	thumbnailVideo?: string;
-	studio?: string;
-	excerpt?: string;
-	showContent?: boolean;
-	studioLink?: string;
-	pageBuilderIsActive?: boolean;
-	setPageBuilderIsActive: (isActive: boolean) => void;
+	// studio?: string;
+	// excerpt?: string;
+	// showContent?: boolean;
+	// studioLink?: string;
+	// pageBuilderIsActive?: boolean;
+	// setPageBuilderIsActive: (isActive: boolean) => void;
 	activeProject: boolean | number;
 	setActiveProject: (value: boolean | number) => void;
 	index: number;

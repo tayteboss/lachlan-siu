@@ -126,6 +126,8 @@ const Page = (props: Props) => {
 		return () => clearTimeout(timer);
 	}, [scrollToProject]);
 
+	console.log('siteSettings', siteSettings);
+
 	return (
 		<PageWrapper
 			variants={pageTransitionVariants}
@@ -144,14 +146,7 @@ const Page = (props: Props) => {
 				setInfoModalIsActive={setInfoModalIsActive}
 				isActive={isHeaderActive}
 			/>
-			{/* <MobileMenu
-				projectsModalIsActive={projectsModalIsActive}
-				infoModalIsActive={infoModalIsActive}
-				setProjectsModalIsActive={setProjectsModalIsActive}
-				setInfoModalIsActive={setInfoModalIsActive}
-			/> */}
 			<ReactLenis root>
-				<HomeIntro data={data?.introContent} />
 				<ProjectsList
 					data={projects}
 					activeProject={activeProject}
@@ -177,6 +172,8 @@ const Page = (props: Props) => {
 					data={projects}
 					activeProject={activeProject}
 					scrollToProject={scrollToProject}
+					projectsModalCTA={siteSettings?.projectsModalCTA}
+					email={siteSettings?.email}
 					setActiveProject={setActiveProject}
 					setProjectsModalIsActive={setProjectsModalIsActive}
 					setScrollToProject={setScrollToProject}

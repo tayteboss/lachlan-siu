@@ -3,7 +3,6 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import pxToRem from '../../../utils/pxToRem';
 import { motion } from 'framer-motion';
-import { useLenis } from '@studio-freight/react-lenis';
 
 type Props = {
 	thumbnailImage?: string;
@@ -22,7 +21,7 @@ const ProjectModalCardWrapper = styled(motion.div)`
 `;
 
 const Inner = styled.div`
-	padding-top: 100%;
+	padding-top: 66.66%;
 	position: relative;
 	margin-bottom: ${pxToRem(8)};
 

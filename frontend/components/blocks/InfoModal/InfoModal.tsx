@@ -29,8 +29,7 @@ const wrapperVariants = {
 		opacity: 1,
 		transition: {
 			duration: 0.5,
-			ease: 'easeInOut',
-			delay: 0.3
+			ease: 'easeInOut'
 		}
 	}
 };
@@ -41,9 +40,7 @@ const InfoModalWrapper = styled(motion.div)`
 	left: 0;
 	width: 100%;
 	height: 100vh;
-	background-color: rgba(255, 255, 255, 0.9);
-	backdrop-filter: blur(5px);
-	-webkit-backdrop-filter: blur(5px);
+	background-color: var(--colour-black);
 	z-index: 90;
 	pointer-events: all;
 	overflow: auto;
@@ -53,6 +50,10 @@ const InfoModalWrapper = styled(motion.div)`
 	}
 	-ms-overflow-style: none;
 	scrollbar-width: 0;
+
+	* {
+		color: var(--colour-white);
+	}
 `;
 
 const Inner = styled.div`
@@ -67,7 +68,9 @@ const IntroWrapper = styled.div`
 	}
 `;
 
-const Intro = styled.h1``;
+const Intro = styled.h1`
+	color: var(--colour-white);
+`;
 
 const SocialWrapper = styled.div`
 	margin-bottom: ${pxToRem(72)};
@@ -84,7 +87,8 @@ const SocialLink = styled.a`
 	font-size: ${pxToRem(28)};
 	line-height: ${pxToRem(35)};
 	text-decoration: none;
-	font-family: var(--font-medium);
+	font-family: var(--font-regular);
+	color: var(--colour-white);
 
 	&:hover {
 		text-decoration: underline;

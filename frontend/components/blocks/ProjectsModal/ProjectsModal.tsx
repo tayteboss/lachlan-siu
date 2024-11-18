@@ -4,16 +4,8 @@ import { AnimatePresence, delay, motion } from 'framer-motion';
 import ProjectModalCard from '../../elements/ProjectModalCard';
 import pxToRem from '../../../utils/pxToRem';
 import LayoutWrapper from '../../common/LayoutWrapper';
-
-type Props = {
-	isActive: boolean;
-	data: ProjectType[];
-	activeProject: boolean | number;
-	scrollToProject: number;
-	setScrollToProject: (value: number) => void;
-	setActiveProject: (value: boolean | number) => void;
-	setProjectsModalIsActive: (value: boolean) => void;
-};
+import LayoutGrid from '../../common/LayoutGrid';
+import Link from 'next/link';
 
 const wrapperVariants = {
 	hidden: {
@@ -48,21 +40,70 @@ const ProjectsModalWrapper = styled(motion.div)`
 	z-index: 90;
 	pointer-events: all;
 	overflow: auto;
+	padding-top: calc(var(--header-h) + 60px);
 `;
 
-const Inner = styled.div`
+const ProjectsListInner = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: ${pxToRem(24)};
-	padding-top: calc(var(--header-h) + 60px);
 	min-width: ${pxToRem(224)};
-	width: 20%;
+	width: 20vw;
 	padding-bottom: ${pxToRem(120)};
+	grid-column: 1 / 6;
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		padding-top: ${pxToRem(32)};
+		grid-column: 1 / -1;
 	}
 `;
+
+const ProjectsCtaWrapper = styled.div`
+	grid-column: 6 / -1;
+	position: sticky;
+	top: 0;
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		position: relative;
+		grid-column: 1 / -1;
+	}
+`;
+
+const ProjectsCtaTitle = styled.h4`
+	margin-bottom: ${pxToRem(40)};
+	color: var(--colour-black);
+	font-size: ${pxToRem(28)};
+	line-height: ${pxToRem(35)};
+	max-width: ${pxToRem(530)};
+`;
+
+const ProjectsCtaLink = styled.p`
+	font-size: ${pxToRem(28)};
+	line-height: ${pxToRem(35)};
+
+	a {
+		font-size: ${pxToRem(28)};
+		line-height: ${pxToRem(35)};
+
+		transition: all var(--transition-speed-default) var(--transition-ease);
+
+		&:hover {
+			opacity: 0.5;
+		}
+	}
+`;
+
+type Props = {
+	isActive: boolean;
+	data: ProjectType[];
+	activeProject: boolean | number;
+	scrollToProject: number;
+	projectsModalCTA: string;
+	email: string;
+	setScrollToProject: (value: number) => void;
+	setActiveProject: (value: boolean | number) => void;
+	setProjectsModalIsActive: (value: boolean) => void;
+};
 
 const ProjectsModal = (props: Props) => {
 	const {
@@ -70,6 +111,8 @@ const ProjectsModal = (props: Props) => {
 		data,
 		activeProject,
 		scrollToProject,
+		projectsModalCTA,
+		email,
 		setScrollToProject,
 		setActiveProject,
 		setProjectsModalIsActive
@@ -88,25 +131,46 @@ const ProjectsModal = (props: Props) => {
 					data-lenis-prevent
 				>
 					<LayoutWrapper>
-						<Inner>
-							{hasData &&
-								data.map((item, i) => (
-									<ProjectModalCard
-										thumbnailImage={item?.thumbnailImage}
-										thumbnailVideo={item?.thumbnailVideo}
-										title={item?.title}
-										key={i}
-										index={i}
-										activeProject={activeProject}
-										scrollToProject={scrollToProject}
-										setScrollToProject={setScrollToProject}
-										setActiveProject={setActiveProject}
-										setProjectsModalIsActive={
-											setProjectsModalIsActive
-										}
-									/>
-								))}
-						</Inner>
+						<LayoutGrid>
+							<ProjectsListInner>
+								{hasData &&
+									data.map((item, i) => (
+										<ProjectModalCard
+											thumbnailImage={
+												item?.thumbnailImage
+											}
+											thumbnailVideo={
+												item?.thumbnailVideo
+											}
+											title={item?.title}
+											key={i}
+											index={i}
+											activeProject={activeProject}
+											scrollToProject={scrollToProject}
+											setScrollToProject={
+												setScrollToProject
+											}
+											setActiveProject={setActiveProject}
+											setProjectsModalIsActive={
+												setProjectsModalIsActive
+											}
+										/>
+									))}
+							</ProjectsListInner>
+							{projectsModalCTA && (
+								<ProjectsCtaWrapper>
+									<ProjectsCtaTitle>
+										{projectsModalCTA}
+									</ProjectsCtaTitle>
+									<ProjectsCtaLink>
+										Email:{' '}
+										<Link href={`mailto:${email}`}>
+											{email}
+										</Link>
+									</ProjectsCtaLink>
+								</ProjectsCtaWrapper>
+							)}
+						</LayoutGrid>
 					</LayoutWrapper>
 				</ProjectsModalWrapper>
 			)}

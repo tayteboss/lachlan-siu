@@ -64,7 +64,6 @@ const PageBuilderTrigger = (props: Props) => {
 	return (
 		<PageBuilderTriggerWrapper
 			onClick={() => setPageBuilderIsActive(!isActive)}
-			className={pageBuilderIsActive ? 'text-link-close' : 'text-link'}
 		>
 			<Base />
 			<Left $isActive={isActive} />

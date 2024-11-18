@@ -1,78 +1,51 @@
 import styled from 'styled-components';
 import { ProjectType } from '../../../shared/types/types';
-import ScopeIntroContent from './ScopeIntroContent';
-import StudioIntroContent from './StudioIntroContent';
-import PageBuilderTrigger from '../../elements/PageBuilderTrigger';
 import pxToRem from '../../../utils/pxToRem';
 
 const ProjectIntroContentWrapper = styled.div`
-	grid-column: 1 / 7;
 	display: flex;
-	flex-direction: column;
 	justify-content: space-between;
-	height: 100%;
-	margin-bottom: ${pxToRem(32)};
-	padding-left: ${pxToRem(24)};
-
-	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		padding: 0 ${pxToRem(16)};
-		grid-column: 1 / -1;
-		order: 2;
-	}
+	align-items: center;
+	padding-bottom: ${pxToRem(14)};
 `;
-
-const ContentWrapper = styled.div``;
 
 const Title = styled.h2`
-	margin-bottom: ${pxToRem(28)};
+	font-size: ${pxToRem(18)};
+	line-height: ${pxToRem(14)};
+	font-family: var(--font-regular);
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		font-size: ${pxToRem(17)};
-		line-height: ${pxToRem(23)};
-		margin-bottom: ${pxToRem(16)};
-		font-family: var(--font-medium);
+		font-size: ${pxToRem(15)};
+		line-height: ${pxToRem(19)};
 	}
 `;
 
-const Excerpt = styled.h3`
-	margin-bottom: ${pxToRem(22)};
+const CarouselIndicator = styled.h4`
+	font-size: ${pxToRem(18)};
+	line-height: ${pxToRem(14)};
+	font-family: var(--font-regular);
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		margin-bottom: ${pxToRem(16)};
+		font-size: ${pxToRem(15)};
+		line-height: ${pxToRem(19)};
 	}
 `;
 
-const TriggerWrapper = styled.div``;
+type Props = {
+	title?: ProjectType['title'];
+	activeSlideIndex: number;
+	carouselLength: number;
+};
 
-const ProjectIntroContent = (props: ProjectType) => {
-	const {
-		title,
-		scope,
-		studio,
-		excerpt,
-		showContent,
-		studioLink,
-		pageBuilderIsActive,
-		setPageBuilderIsActive
-	} = props;
+const ProjectIntroContent = (props: Props) => {
+	const { title, activeSlideIndex, carouselLength } = props;
 
 	return (
 		<ProjectIntroContentWrapper>
-			<ContentWrapper>
-				{title && <Title>{title}</Title>}
-				{excerpt && <Excerpt>{excerpt}</Excerpt>}
-				<StudioIntroContent studio={studio} link={studioLink} />
-				<ScopeIntroContent scope={scope} />
-			</ContentWrapper>
-			{showContent && (
-				<TriggerWrapper>
-					<PageBuilderTrigger
-						isActive={pageBuilderIsActive}
-						pageBuilderIsActive={pageBuilderIsActive}
-						setPageBuilderIsActive={setPageBuilderIsActive}
-					/>
-				</TriggerWrapper>
-			)}
+			{title && <Title>{title}</Title>}
+			<CarouselIndicator>
+				{activeSlideIndex + 1}/{carouselLength}
+			</CarouselIndicator>
 		</ProjectIntroContentWrapper>
 	);
 };

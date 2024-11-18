@@ -22,12 +22,7 @@ const ProjectsList = (props: Props) => {
 			{data.map((project, i) => (
 				<ProjectCard
 					title={project?.title}
-					pageBuilder={project?.pageBuilder}
-					scope={project?.scope}
-					studio={project?.studio}
-					excerpt={project?.excerpt}
-					showContent={project?.showContent}
-					studioLink={project?.studioLink}
+					carousel={project?.carousel}
 					thumbnailImage={project?.thumbnailImage}
 					thumbnailVideo={project?.thumbnailVideo}
 					activeProject={activeProject}
