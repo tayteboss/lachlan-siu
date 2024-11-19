@@ -126,8 +126,6 @@ const Page = (props: Props) => {
 		return () => clearTimeout(timer);
 	}, [scrollToProject]);
 
-	console.log('siteSettings', siteSettings);
-
 	return (
 		<PageWrapper
 			variants={pageTransitionVariants}

@@ -17,7 +17,10 @@ const ClientListWrapper = styled.div`
 	}
 `;
 
-const Title = styled.h3``;
+const Title = styled.h3`
+	font-weight: 600 !important;
+	letter-spacing: 0.02em;
+`;
 
 const ListWrapper = styled.div`
 	display: flex;
@@ -27,13 +30,18 @@ const ListWrapper = styled.div`
 
 const LinkTag = styled.a`
 	text-decoration: none;
+	font-weight: 600 !important;
+	letter-spacing: 0.02em;
 
 	&:hover {
 		text-decoration: underline;
 	}
 `;
 
-const ListItem = styled.p``;
+const ListItem = styled.p`
+	font-weight: 600 !important;
+	letter-spacing: 0.02em;
+`;
 
 const ClientList = (props: Props) => {
 	const { list, title } = props;

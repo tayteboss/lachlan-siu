@@ -91,6 +91,13 @@ const Header = (props: Props) => {
 		setInfoModalIsActive
 	} = props;
 
+	const scrollToTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	};
+
 	return (
 		<HeaderWrapper
 			className="header"
@@ -137,6 +144,7 @@ const Header = (props: Props) => {
 						onClick={() => {
 							setProjectsModalIsActive(false);
 							setInfoModalIsActive(false);
+							scrollToTop();
 						}}
 					>
 						<Logo />

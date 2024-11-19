@@ -70,6 +70,11 @@ const IntroWrapper = styled.div`
 
 const Intro = styled.h1`
 	color: var(--colour-white);
+	font-weight: 600;
+	letter-spacing: 0.02em;
+
+	* {
+	}
 `;
 
 const SocialWrapper = styled.div`

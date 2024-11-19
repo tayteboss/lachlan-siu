@@ -12,6 +12,7 @@ const ProjectsListWrapper = styled.section`
 	position: relative;
 	z-index: 3;
 	background: var(--colour-white);
+	padding-top: calc(var(--header-h) + 64px);
 `;
 
 const ProjectsList = (props: Props) => {

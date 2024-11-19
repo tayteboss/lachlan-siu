@@ -41,6 +41,10 @@ const ProjectsModalWrapper = styled(motion.div)`
 	pointer-events: all;
 	overflow: auto;
 	padding-top: calc(var(--header-h) + 60px);
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		display: none;
+	}
 `;
 
 const ProjectsListInner = styled.div`
@@ -58,33 +62,26 @@ const ProjectsListInner = styled.div`
 	}
 `;
 
-const ProjectsCtaWrapper = styled.div`
-	grid-column: 6 / -1;
-	position: sticky;
-	top: 0;
+const ProjectsCtaWrapper = styled(motion.div)`
+	position: fixed;
+	bottom: ${pxToRem(16)};
+	right: ${pxToRem(24)};
+	width: ${pxToRem(348)};
+	z-index: 95;
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		position: relative;
-		grid-column: 1 / -1;
 	}
 `;
 
-const ProjectsCtaTitle = styled.h4`
+const ProjectsCtaTitle = styled.p`
 	margin-bottom: ${pxToRem(40)};
 	color: var(--colour-black);
-	font-size: ${pxToRem(28)};
-	line-height: ${pxToRem(35)};
 	max-width: ${pxToRem(530)};
 `;
 
 const ProjectsCtaLink = styled.p`
-	font-size: ${pxToRem(28)};
-	line-height: ${pxToRem(35)};
-
 	a {
-		font-size: ${pxToRem(28)};
-		line-height: ${pxToRem(35)};
-
 		transition: all var(--transition-speed-default) var(--transition-ease);
 
 		&:hover {
@@ -123,56 +120,67 @@ const ProjectsModal = (props: Props) => {
 	return (
 		<AnimatePresence>
 			{isActive && (
-				<ProjectsModalWrapper
-					variants={wrapperVariants}
-					initial="hidden"
-					animate="visible"
-					exit="hidden"
-					data-lenis-prevent
-				>
-					<LayoutWrapper>
-						<LayoutGrid>
-							<ProjectsListInner>
-								{hasData &&
-									data.map((item, i) => (
-										<ProjectModalCard
-											thumbnailImage={
-												item?.thumbnailImage
-											}
-											thumbnailVideo={
-												item?.thumbnailVideo
-											}
-											title={item?.title}
-											key={i}
-											index={i}
-											activeProject={activeProject}
-											scrollToProject={scrollToProject}
-											setScrollToProject={
-												setScrollToProject
-											}
-											setActiveProject={setActiveProject}
-											setProjectsModalIsActive={
-												setProjectsModalIsActive
-											}
-										/>
-									))}
-							</ProjectsListInner>
-							{projectsModalCTA && (
-								<ProjectsCtaWrapper>
-									<ProjectsCtaTitle>
-										{projectsModalCTA}
-									</ProjectsCtaTitle>
-									<ProjectsCtaLink>
-										Email:{' '}
-										<Link href={`mailto:${email}`}>
-											{email}
-										</Link>
-									</ProjectsCtaLink>
-								</ProjectsCtaWrapper>
-							)}
-						</LayoutGrid>
-					</LayoutWrapper>
-				</ProjectsModalWrapper>
+				<>
+					<ProjectsModalWrapper
+						variants={wrapperVariants}
+						initial="hidden"
+						animate="visible"
+						exit="hidden"
+						key={1}
+						data-lenis-prevent
+					>
+						<LayoutWrapper>
+							<LayoutGrid>
+								<ProjectsListInner>
+									{hasData &&
+										data.map((item, i) => (
+											<ProjectModalCard
+												thumbnailImage={
+													item?.thumbnailImage
+												}
+												thumbnailVideo={
+													item?.thumbnailVideo
+												}
+												title={item?.title}
+												key={i}
+												index={i}
+												activeProject={activeProject}
+												scrollToProject={
+													scrollToProject
+												}
+												setScrollToProject={
+													setScrollToProject
+												}
+												setActiveProject={
+													setActiveProject
+												}
+												setProjectsModalIsActive={
+													setProjectsModalIsActive
+												}
+											/>
+										))}
+								</ProjectsListInner>
+							</LayoutGrid>
+						</LayoutWrapper>
+					</ProjectsModalWrapper>
+					{projectsModalCTA && (
+						<ProjectsCtaWrapper
+							variants={wrapperVariants}
+							initial="hidden"
+							animate="visible"
+							exit="hidden"
+							key={1}
+						>
+							<ProjectsCtaTitle>
+								{projectsModalCTA}
+							</ProjectsCtaTitle>
+							<ProjectsCtaLink>
+								Email:{' '}
+								<Link href={`mailto:${email}`}>{email}</Link>
+							</ProjectsCtaLink>
+						</ProjectsCtaWrapper>
+					)}
+				</>
 			)}
 		</AnimatePresence>
 	);
