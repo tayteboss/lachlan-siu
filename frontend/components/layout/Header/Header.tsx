@@ -59,10 +59,6 @@ const Title = styled(motion.div)<StyledProps>`
 
 const DesktopLogo = styled.button`
 	transition: all 500ms var(--transition-ease);
-
-	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
-		display: none;
-	}
 `;
 
 const wrapperVariants = {
