@@ -4,18 +4,13 @@ import pxToRem from '../../../utils/pxToRem';
 import { ProjectType } from '../../../shared/types/types';
 import ProjectCarousel from '../../blocks/ProjectCarousel';
 import { useState } from 'react';
+import LayoutWrapper from '../../common/LayoutWrapper';
 
 const ProjectCardWrapper = styled.div`
 	margin-bottom: ${pxToRem(80)};
 `;
 
-const Inner = styled.div`
-	padding: 0 ${pxToRem(120)};
-
-	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		padding: 0 ${pxToRem(16)};
-	}
-`;
+const Inner = styled.div``;
 
 const ProjectCard = (props: ProjectType) => {
 	const { title, thumbnailImage, thumbnailVideo, carousel, index } = props;
@@ -25,20 +20,22 @@ const ProjectCard = (props: ProjectType) => {
 
 	return (
 		<ProjectCardWrapper id={`project-${index}`}>
-			<Inner className="project-inner">
-				<ProjectCarousel
-					thumbnailImage={thumbnailImage}
-					thumbnailVideo={thumbnailVideo}
-					carousel={carousel}
-					setActiveSlideIndex={setActiveSlideIndex}
-					setCarouselLength={setCarouselLength}
-				/>
-				<ProjectIntroContent
-					title={title}
-					activeSlideIndex={activeSlideIndex}
-					carouselLength={carouselLength}
-				/>
-			</Inner>
+			<LayoutWrapper>
+				<Inner className="project-inner">
+					<ProjectCarousel
+						thumbnailImage={thumbnailImage}
+						thumbnailVideo={thumbnailVideo}
+						carousel={carousel}
+						setActiveSlideIndex={setActiveSlideIndex}
+						setCarouselLength={setCarouselLength}
+					/>
+					<ProjectIntroContent
+						title={title}
+						activeSlideIndex={activeSlideIndex}
+						carouselLength={carouselLength}
+					/>
+				</Inner>
+			</LayoutWrapper>
 		</ProjectCardWrapper>
 	);
 };

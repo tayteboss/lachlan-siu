@@ -56,31 +56,31 @@ const Page = (props: Props) => {
 	const [isHeaderActive, setHeaderIsActive] = useState(true);
 	const [scrollToProject, setScrollToProject] = useState(0);
 
-	const prevScrollPosRef = useRef(0);
+	// const prevScrollPosRef = useRef(0);
 	const viewportWidth = useViewportWidth();
 
-	const handleScroll = () => {
-		const currentScrollPos = window.pageYOffset;
+	// const handleScroll = () => {
+	// 	const currentScrollPos = window.pageYOffset;
 
-		if (currentScrollPos < 30) {
-			setHeaderIsActive(true);
-			return;
-		}
+	// 	if (currentScrollPos < 30) {
+	// 		setHeaderIsActive(true);
+	// 		return;
+	// 	}
 
-		const isScrollingDown = currentScrollPos > prevScrollPosRef.current;
+	// 	const isScrollingDown = currentScrollPos > prevScrollPosRef.current;
 
-		setHeaderIsActive(!isScrollingDown);
-		prevScrollPosRef.current = currentScrollPos;
-	};
+	// 	setHeaderIsActive(!isScrollingDown);
+	// 	prevScrollPosRef.current = currentScrollPos;
+	// };
 
-	useEffect(() => {
-		const throttledHandleScroll = throttle(handleScroll, 100);
-		window.addEventListener('scroll', throttledHandleScroll);
+	// useEffect(() => {
+	// 	const throttledHandleScroll = throttle(handleScroll, 100);
+	// 	window.addEventListener('scroll', throttledHandleScroll);
 
-		return () => {
-			window.removeEventListener('scroll', throttledHandleScroll);
-		};
-	}, []);
+	// 	return () => {
+	// 		window.removeEventListener('scroll', throttledHandleScroll);
+	// 	};
+	// }, []);
 
 	const lenis = useLenis(({ scroll }) => {});
 
@@ -101,9 +101,9 @@ const Page = (props: Props) => {
 	}, [lenis, projectsModalIsActive, infoModalIsActive]);
 
 	useEffect(() => {
-		if (activeProject) {
-			setHeaderIsActive(false);
-		}
+		// if (activeProject) {
+		// 	setHeaderIsActive(false);
+		// }
 
 		setAppCursorRefresh(appCursorRefresh + 1);
 

@@ -70,7 +70,7 @@ const IntroWrapper = styled.div`
 
 const Intro = styled.h1`
 	color: var(--colour-white);
-	font-weight: 600;
+	font-family: var(--font-medium) !important;
 	letter-spacing: 0.02em;
 
 	* {
@@ -140,9 +140,6 @@ const InfoModal = (props: Props) => {
 						<Inner>
 							{introContent && (
 								<IntroWrapper>
-									<MobileLogo>
-										<Logo />
-									</MobileLogo>
 									<Intro>{introContent}</Intro>
 								</IntroWrapper>
 							)}

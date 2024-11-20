@@ -19,7 +19,7 @@ type Props = {
 };
 
 const HeaderWrapper = styled.header<StyledProps>`
-	padding: ${pxToRem(15)} 0;
+	padding: ${pxToRem(24)} 0;
 	background: ${(props) =>
 		props.infoModalIsActive
 			? 'var(--colour-black)'
@@ -32,6 +32,10 @@ const HeaderWrapper = styled.header<StyledProps>`
 	z-index: 100;
 
 	transition: all 500ms var(--transition-ease);
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		padding: ${pxToRem(16)} 0;
+	}
 
 	* {
 		color: ${(props) =>
@@ -53,7 +57,14 @@ const Title = styled(motion.div)<StyledProps>`
 	transition: all 500ms var(--transition-ease);
 
 	&.type-h3 {
-		font-size: ${pxToRem(25)};
+		font-size: ${pxToRem(18)};
+		line-height: ${pxToRem(14)};
+		font-family: var(--font-regular);
+
+		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+			font-size: ${pxToRem(15)};
+			line-height: ${pxToRem(19)};
+		}
 	}
 `;
 

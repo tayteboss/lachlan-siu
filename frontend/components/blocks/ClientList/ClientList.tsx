@@ -18,7 +18,7 @@ const ClientListWrapper = styled.div`
 `;
 
 const Title = styled.h3`
-	font-weight: 600 !important;
+	font-family: var(--font-medium) !important;
 	letter-spacing: 0.02em;
 `;
 
@@ -30,7 +30,7 @@ const ListWrapper = styled.div`
 
 const LinkTag = styled.a`
 	text-decoration: none;
-	font-weight: 600 !important;
+	font-family: var(--font-medium) !important;
 	letter-spacing: 0.02em;
 
 	&:hover {
@@ -39,7 +39,7 @@ const LinkTag = styled.a`
 `;
 
 const ListItem = styled.p`
-	font-weight: 600 !important;
+	font-family: var(--font-medium) !important;
 	letter-spacing: 0.02em;
 `;
 

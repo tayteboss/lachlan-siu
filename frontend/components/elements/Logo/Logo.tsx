@@ -7,12 +7,19 @@ const LogoWrapper = styled.div`
 
 	transition: all 500ms var(--transition-ease);
 
+	&.type-h3 {
+		font-size: ${pxToRem(18)};
+		line-height: ${pxToRem(14)};
+		font-family: var(--font-regular);
+
+		@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+			font-size: ${pxToRem(15)};
+			line-height: ${pxToRem(19)};
+		}
+	}
+
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
 		text-align: left;
-
-		&.type-h3 {
-			font-size: ${pxToRem(25)};
-		}
 	}
 `;
 
