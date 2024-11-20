@@ -100,7 +100,7 @@ const SocialLink = styled.a`
 	}
 
 	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-		font-family: var(--font-regular);
+		font-family: var(--font-medium);
 		font-size: ${pxToRem(25)};
 		line-height: ${pxToRem(32)};
 	}
