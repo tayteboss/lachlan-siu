@@ -164,6 +164,9 @@ const Page = (props: Props) => {
 					pastList={infoPage?.pastList}
 					introContent={data?.introContent}
 					email={siteSettings?.email}
+					acknowledgementOfCountry={
+						siteSettings?.acknowledgementOfCountry
+					}
 				/>
 				<ProjectsModal
 					isActive={projectsModalIsActive}

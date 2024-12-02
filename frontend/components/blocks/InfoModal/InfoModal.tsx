@@ -4,35 +4,7 @@ import LayoutWrapper from '../../common/LayoutWrapper';
 import LayoutGrid from '../../common/LayoutGrid';
 import ClientList from '../ClientList';
 import pxToRem from '../../../utils/pxToRem';
-import { ClientType } from '../../../shared/types/types';
-import Logo from '../../elements/Logo';
-
-type Props = {
-	isActive: boolean;
-	instagramUrl: string;
-	linkedInUrl: string;
-	clientList: ClientType[];
-	pastList: ClientType[];
-	introContent: string;
-	email: string;
-};
-
-const wrapperVariants = {
-	hidden: {
-		opacity: 0,
-		transition: {
-			duration: 0.5,
-			ease: 'easeInOut'
-		}
-	},
-	visible: {
-		opacity: 1,
-		transition: {
-			duration: 0.5,
-			ease: 'easeInOut'
-		}
-	}
-};
+import { ClientType, SiteSettingsType } from '../../../shared/types/types';
 
 const InfoModalWrapper = styled(motion.div)`
 	position: fixed;
@@ -57,7 +29,7 @@ const InfoModalWrapper = styled(motion.div)`
 `;
 
 const Inner = styled.div`
-	padding-bottom: ${pxToRem(120)};
+	padding-bottom: ${pxToRem(24)};
 `;
 
 const IntroWrapper = styled.div`
@@ -72,9 +44,6 @@ const Intro = styled.h1`
 	color: var(--colour-white);
 	font-family: var(--font-medium) !important;
 	letter-spacing: 0.02em;
-
-	* {
-	}
 `;
 
 const SocialWrapper = styled.div`
@@ -106,14 +75,69 @@ const SocialLink = styled.a`
 	}
 `;
 
-const MobileLogo = styled.div`
-	display: none;
+const EmailWrapper = styled.div`
+	grid-column: 1 / 7;
+	order: 1;
+	color: var(--colour-white);
+	align-self: end;
 
-	@media ${(props) => props.theme.mediaBreakpoints.mobile} {
-		display: block;
-		margin-bottom: ${pxToRem(24)};
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		order: 2;
+		grid-column: 1 / -1;
 	}
 `;
+
+const Email = styled.a`
+	text-decoration: none;
+	color: var(--colour-white);
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
+const AOCWrapper = styled.div`
+	grid-column: 7 / -1;
+	order: 2;
+	padding-top: ${pxToRem(240)};
+
+	@media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+		order: 1;
+		grid-column: 1 / -1;
+		margin-bottom: ${pxToRem(20)};
+		padding-top: ${pxToRem(80)};
+	}
+`;
+
+const AOC = styled.p``;
+
+const wrapperVariants = {
+	hidden: {
+		opacity: 0,
+		transition: {
+			duration: 0.5,
+			ease: 'easeInOut'
+		}
+	},
+	visible: {
+		opacity: 1,
+		transition: {
+			duration: 0.5,
+			ease: 'easeInOut'
+		}
+	}
+};
+
+type Props = {
+	isActive: boolean;
+	instagramUrl: string;
+	linkedInUrl: string;
+	clientList: ClientType[];
+	pastList: ClientType[];
+	introContent: string;
+	email: string;
+	acknowledgementOfCountry: SiteSettingsType['acknowledgementOfCountry'];
+};
 
 const InfoModal = (props: Props) => {
 	const {
@@ -123,7 +147,8 @@ const InfoModal = (props: Props) => {
 		clientList,
 		pastList,
 		introContent,
-		email
+		email,
+		acknowledgementOfCountry
 	} = props;
 
 	return (
@@ -167,11 +192,31 @@ const InfoModal = (props: Props) => {
 								)}
 							</SocialWrapper>
 							<LayoutGrid>
-								<ClientList title="Past:" list={pastList} />
 								<ClientList
-									title="Clients:"
+									title="Past Experience:"
+									list={pastList}
+								/>
+								<ClientList
+									title="Selected Clients:"
 									list={clientList}
 								/>
+								<EmailWrapper>
+									{email && (
+										<Email
+											className="type-h3"
+											href={`mailto: ${email}`}
+										>
+											{email}
+										</Email>
+									)}
+								</EmailWrapper>
+								<AOCWrapper>
+									{acknowledgementOfCountry && (
+										<AOC className="type-h3">
+											{acknowledgementOfCountry}
+										</AOC>
+									)}
+								</AOCWrapper>
 							</LayoutGrid>
 						</Inner>
 					</LayoutWrapper>
